@@ -1,4 +1,4 @@
-# 🧠 **Machine Learning Concepts Overview (Interview Guide)**
+# 🧠 **Machine Learning Concepts Overview**
 
 ---
 
