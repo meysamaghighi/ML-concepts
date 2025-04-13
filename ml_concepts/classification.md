@@ -17,6 +17,8 @@
 | 13 | [VotingClassifier](#13-votingclassifier)       | Ensemble (Vote)   | Combines multiple classifiers                        | Simple ensemble                                    | Needs similar scale models                        | `VotingClassifier(estimators=[...])` (sklearn)  | Hard or soft voting               |
 | 14 | [StackingClassifier](#14-stackingclassifier)     | Ensemble (Stack)  | Meta-model on top of base classifiers                | Often best performance                             | More complexity                                   | `StackingClassifier(estimators=[...])` (sklearn)| Can overfit small datasets        |
 | 15 | [QDA](#15-qda)                        | Probabilistic     | Quadratic Discriminant Analysis                    | Captures non-linear class boundaries              | Assumes Gaussian distribution per class          | `QuadraticDiscriminantAnalysis()` (sklearn)     | Use when classes are well-separated and Gaussian |
+| 16 | [Gaussian Process Classifier](#16-gaussian-process-classifier) | Probabilistic     | Bayesian classifier using Gaussian Processes for class probability | Provides uncertainty estimates, flexible decision boundary | Computationally expensive, not scalable to large data       | `GaussianProcessClassifier()` (sklearn)              | Best for small datasets with uncertainty needs |
+---
 
 ---
 
@@ -299,4 +301,62 @@ model.fit(X_train, y_train)
 ```
 
 **Use Case**: Use QDA when the data is Gaussian but has class-specific variances. It performs well when classes are well-separated and follow different distributions.
+
+---
+
+### 16. Gaussian Process Classifier
+
+Gaussian Process Classifier (GPC) extends Gaussian Processes to **classification** tasks by modeling a distribution over functions that map inputs to class probabilities. Unlike regression, classification requires mapping continuous latent functions to a discrete label space using a sigmoid or softmax function.
+
+---
+
+**Intuition**:  
+Instead of predicting exact values (like in regression), GPC models the **latent function** and then **squashes it** through a logistic function to get a probability of class membership. This allows GPC to output not just the predicted class but also the **confidence** in that prediction.
+
+> Think of it as: "At point `x`, what's the probability this belongs to class 1, given what we know about the training data and how similar `x` is to them?"
+
+---
+
+**Math**:
+1. Define latent function \( f(x) \sim \mathcal{GP}(0, k(x, x')) \)
+2. Use a **sigmoid** (e.g., logistic) link function to convert latent function to probability:
+   \[
+   p(y=1|x) = \sigma(f(x))
+   \]
+3. Use approximate inference (e.g., Laplace approximation or EP) since the posterior is non-Gaussian.
+
+---
+
+**Example Code**:
+```python
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
+from sklearn.datasets import make_moons
+import matplotlib.pyplot as plt
+
+# Create a toy dataset
+X, y = make_moons(n_samples=100, noise=0.2, random_state=42)
+
+# Define GP Classifier with RBF kernel
+kernel = 1.0 * RBF(length_scale=1.0)
+gpc = GaussianProcessClassifier(kernel=kernel)
+gpc.fit(X, y)
+
+# Plot decision boundary
+import numpy as np
+xx, yy = np.meshgrid(np.linspace(-2, 3, 100), np.linspace(-1.5, 2, 100))
+Z = gpc.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1].reshape(xx.shape)
+
+plt.contourf(xx, yy, Z, levels=25, cmap='RdBu', alpha=0.6)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap='RdBu', edgecolors='k')
+plt.title("Gaussian Process Classifier Decision Boundary")
+plt.show()
+```
+
+---
+
+**Use Case**:
+- Binary or multi-class classification with small datasets
+- When **uncertainty quantification** is important (e.g., medical diagnosis, scientific experiments)
+- Alternative to SVM when probabilistic output is preferred
 
