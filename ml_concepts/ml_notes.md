@@ -36,4 +36,10 @@
 - Linear regression is used for regression and logistic regression is used for classification.
 - Logistic regression is a linear model, usually used for binary classification. It is common in medical fields and social sciences. Its parameters are estimated by maximum-likelihood estimation (MLE).
 - **Cross-Validation Estimator (EstimatorCV)** in scikit-learn: a number of estimators have built-in cross-validation capabilities that speed up model selection as opposed to canonical estimator, plus grid search.
+- **Underfitting** is when ML model is too simple to capture the underlying patterns -- it performs poorly on both training and test data. It's like trying to fit a line to a clear curve -- the model just doesn't get it.
+- **Underfitting**: when it happens --> cure
+    - Model too simple --> use a more complex model
+    - Not enough training --> train for longer
+    - Too much regularization --> reduce regularization
+    - Irrelevant or too few features --> add more/better features
 - 
