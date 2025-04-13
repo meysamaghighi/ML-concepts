@@ -16,6 +16,7 @@
 | 12 | [MLPClassifier](#12-mlpclassifier)          | Neural Network    | Neural network (feed-forward)                        | Captures complex patterns                          | Needs more data and tuning                        | `MLPClassifier(hidden_layer_sizes=(100,))`      | Sensitive to scaling              |
 | 13 | [VotingClassifier](#13-votingclassifier)       | Ensemble (Vote)   | Combines multiple classifiers                        | Simple ensemble                                    | Needs similar scale models                        | `VotingClassifier(estimators=[...])` (sklearn)  | Hard or soft voting               |
 | 14 | [StackingClassifier](#14-stackingclassifier)     | Ensemble (Stack)  | Meta-model on top of base classifiers                | Often best performance                             | More complexity                                   | `StackingClassifier(estimators=[...])` (sklearn)| Can overfit small datasets        |
+| 15 | [QDA](#15-qda)                        | Probabilistic     | Quadratic Discriminant Analysis                    | Captures non-linear class boundaries              | Assumes Gaussian distribution per class          | `QuadraticDiscriminantAnalysis()` (sklearn)     | Use when classes are well-separated and Gaussian |
 
 ---
 
@@ -273,4 +274,29 @@ ensemble.fit(X_train, y_train)
 Use when accuracy is key and you can afford the complexity. May overfit on small datasets — cross-validation is helpful.
 
 ---
+
+### 15. QDA
+
+Quadratic Discriminant Analysis (QDA) is a probabilistic classification model that, like LDA, assumes each class follows a Gaussian distribution. However, unlike LDA, QDA allows each class to have its own covariance matrix, enabling it to capture quadratic decision boundaries.
+
+**Intuition**: Imagine you're trying to separate two clouds of points in space, but each cloud has a different shape or orientation. QDA finds a curved boundary (a quadratic surface) to separate them.
+
+**Assumptions**:
+- Features are normally distributed within each class.
+- Covariance matrices can differ across classes.
+
+**Mathematics**: QDA models the class-conditional densities as Gaussians and applies Bayes' theorem to compute posterior probabilities:
+
+$$ P(y=k|x) ∝ π_k * N(x | μ_k, Σ_k) $$
+
+Where `π_k` is the prior, and `N` is the multivariate normal density with class-specific mean `μ_k` and covariance `Σ_k`.
+
+**Example Code**:
+```python
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+model = QuadraticDiscriminantAnalysis()
+model.fit(X_train, y_train)
+```
+
+**Use Case**: Use QDA when the data is Gaussian but has class-specific variances. It performs well when classes are well-separated and follow different distributions.
 
