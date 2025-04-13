@@ -44,7 +44,7 @@ Logistic Regression is a linear model used for binary (and multiclass) classific
 **Intuition**: Logistic Regression learns a linear decision boundary and outputs probabilities. It works best when classes are linearly separable.
 
 **Math**:
-\[ P(y=1|x) = \frac{1}{1 + e^{-w^T x}} \]
+$$\left[ P(y=1|x) = \frac{1}{1 + e^{-w^T x}} \right]$$
 The model is trained by minimizing the log loss (cross-entropy) between predicted and actual labels.
 
 **Code Example**:
@@ -64,8 +64,8 @@ Decision Trees split data based on feature thresholds to create a flowchart-like
 **Intuition**: Trees recursively partition the feature space to create homogeneous subsets. Each split maximizes some criterion like information gain.
 
 **Math**: Common split metrics:
-- Gini Impurity: \( G = 1 - \sum p_i^2 \)
-- Entropy: \( H = -\sum p_i \log(p_i) \)
+- Gini Impurity: $\left( G = 1 - \sum p_i^2 \right)$
+- Entropy: $\left( H = -\sum p_i \log(p_i) \right)$
 
 **Code Example**:
 ```python
@@ -120,7 +120,7 @@ XGBoost (Extreme Gradient Boosting) is a powerful and scalable machine learning 
 
 **Intuition**: Combine many weak learners (shallow trees) to form a strong learner by minimizing a loss function iteratively.
 
-**Math**: Adds trees by optimizing: \( L = \sum_{i} l(y_i, \hat{y}_i) + \sum_k \Omega(f_k) \), where \( \Omega \) is a regularization term.
+**Math**: Adds trees by optimizing: $\left( L = \sum_{i} l(y_i, \hat{y}_i) + \sum_k \Omega(f_k) \right)$, where $\left( \Omega \right)$ is a regularization term.
 
 **Example Code**:
 ```python
@@ -180,7 +180,7 @@ Support Vector Machines (SVM) are powerful classifiers that aim to find the opti
 
 **Kernel Trick**: Allows mapping data to higher-dimensional spaces without explicitly computing the transformation, enabling linear separability.
 
-**Mathematics**: Maximize \( \frac{2}{\|w\|} \), subject to correct classification.
+**Mathematics**: Maximize $\left( \frac{2}{\|w\|} \right)$, subject to correct classification.
 
 **Example Code**:
 ```python
