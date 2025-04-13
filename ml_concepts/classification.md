@@ -24,7 +24,7 @@ Naive Bayes is a simple yet powerful probabilistic classifier based on Bayes' th
 
 **Intuition**: Imagine sorting emails into "spam" and "not spam" based on word frequency. Naive Bayes assumes that the presence of one word is independent of another, given the class.
 
-**Math**: \( P(C|X) \propto P(X|C)P(C) \), where \( X = (x_1, ..., x_n) \).
+**Math**: $$\left( P(C|X) \propto P(X|C)P(C) \right), where \left( X = (x_1, ..., x_n) \right).$$
 
 **Example Code**:
 ```python
