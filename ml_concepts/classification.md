@@ -48,7 +48,7 @@ Logistic Regression is a linear model used for binary (and multiclass) classific
 
 **Math**:
 $$\left[ P(y=1|x) = \frac{1}{1 + e^{-w^T x}} \right]$$
-The model is trained by minimizing the log loss (cross-entropy) between predicted and actual labels.
+The model is trained by minimizing the log-loss/cross-entropy (equivalently, maximizing the likelihood) between predicted and actual labels.
 
 **Code Example**:
 ```python

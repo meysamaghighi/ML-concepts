@@ -34,7 +34,7 @@
     - Comparison to RF: SVM w/ RBF kernel can handle circular data patterns
     - SVM w/out a kernel is sometimes better than linear regression b/c it has a loss function that is epsilon-insensitive, which ignores small errors and focuses on staying within a set margin.
 - Linear regression is used for regression and logistic regression is used for classification.
-- Logistic regression is a linear model, usually used for binary classification. It is common in medical fields and social sciences. Its parameters are estimated by maximum-likelihood estimation (MLE).
+- **Logistic regression** is a linear model, usually used for binary classification. It is common in medical fields and social sciences. Its parameters are estimated by maximum-likelihood estimation (MLE).
 - **Cross-Validation Estimator (EstimatorCV)** in scikit-learn: a number of estimators have built-in cross-validation capabilities that speed up model selection as opposed to canonical estimator, plus grid search.
 - **Underfitting** is when ML model is too simple to capture the underlying patterns -- it performs poorly on both training and test data. It's like trying to fit a line to a clear curve -- the model just doesn't get it.
 - **Underfitting**: when it happens --> cure
@@ -42,4 +42,25 @@
     - Not enough training --> train for longer
     - Too much regularization --> reduce regularization
     - Irrelevant or too few features --> add more/better features
+- **Sigmoid**: any function whose graph is S-shaped. Examples:
+    - Logistic function
+    - Hyperbolic tangent (tanh x)
+    - Arctangent function (arctan x)
+- In linear regression, logistic regression, softmax regression, poison regression, **minimizing log-loss/cross-entropy is equivalent to maximizing likelihood/log-likelihood**.
+    - MLE leads directly to cross-entropy when data is categorical.
+- **Entropy**: measures uncertainty in one distribution. $H(P) = -\sum_i{P(i)}log(P(i))$
+- **Cross-entropy**: compares a true distribution and a predicted one -- becomes loss function in classification tasks. $H(P,Q) = -\sum_i{P(i)}log(Q(i))$.
+    - In classification, when P is one-hot vector and Q is model's softmax output, cross-entropy becomes: $Loss = -log(Q(true\ class))$. Explanation: penalize model when it assigns low probability to the correct class.
+- Tree-based models use **split metrics** to decide the best way to divide data at each node.
+    - For classification, common metrics are **Gini impurity** (used in CART and Random Forest) and **Information Gain** (based on entropy, used in ID3 and C4.5).
+    - For regression tasks, splits are chosen based on **variance reduction**, often via **Mean Squared Error (MSE)**.
+     - More advanced models like **XGBoost**, **LightGBM**, and **CatBoost** use **gradient-based metrics** involving both first and second derivatives (gradients and Hessians) of the loss function to optimize splits. These metrics ensure that each split increases the model's ability to predict accurately by reducing impurity or improving loss.
+- **Linear/Logistic-Regression vs SGD**:
+    - Both **LinearRegression** and **LogisticRegression** in scikit-learn use exact or quasi-Newton solvers to find optimal parameters efficiently for small to medium datasets, solving their respective loss functions (MSE for regression, log-loss for classification) deterministically.
+    - In contrast, **SGDRegressor** and **SGDClassifier** use **stochastic gradient descent**, making them well-suited for **large-scale or online learning**, with iterative updates, tunable hyperparameters (like learning rate and epochs), and support for **partial fitting**. While they can solve the same problems as their exact counterparts, their performance depends on optimization settings and may vary across runs. Additionally, `SGDClassifier` supports other loss functions beyond log-loss, such as hinge (for SVM), giving it more flexibility.
+- **Partial fitting**: train model incrementally due to online learning, big data, checkpointing (pause, save, resume)
+- Gaussian Process (GP) is a Stochastic Process:
+    - (single-dimensional) A model that gives you a normal distribution for the values of the function at every possible input x.
+    - This is why we get 95% confidence interval
+    ![alt text](image.png)
 - 
