@@ -88,10 +88,9 @@ $$ p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k) $$
 ### 5. **Expectation Maximization (EM)**
 - **Math**: Iteratively optimizes the expected log-likelihood:
   
-$$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} $$
+$$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} \newline
+\text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
 
-$$ \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
-- 
 **Idea**: Powers soft clustering in GMMs and temporal models like HMM.
 - **Code**: Embedded in `GaussianMixture()` or HMM packages.
 - **Use Case**: Clustering, missing data imputation.
