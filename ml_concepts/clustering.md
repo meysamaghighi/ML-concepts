@@ -1,243 +1,276 @@
 ## 📌 Unsupervised Learning Models
 
-| #  | Model                                                                                     | Type                    | Description                          | Pros                                 | Cons                                | Example Code                             | Notes                                    |
-|----|--------------------------------------------------------------------------------------------|-------------------------|--------------------------------------|--------------------------------------|-------------------------------------|------------------------------------------|------------------------------------------|
-| 1  | [KMeans](#1-kmeans)                                                                       | Clustering              | Centroid-based clustering            | Simple, scalable                     | Assumes spherical clusters          | `KMeans()` (sklearn)                     | Use `k-means++` init                      |
-| 2  | [MiniBatchKMeans](#2-minibatchkmeans)                                                     | Clustering              | Faster version of KMeans             | Scales to big data                   | Less accurate                       | `MiniBatchKMeans()` (sklearn)            | Use for streaming data                    |
-| 3  | [DBSCAN](#3-dbscan)                                                                       | Clustering              | Density-based clusters               | Finds arbitrary shapes               | Bad with varying densities          | `DBSCAN()` (sklearn)                     | Doesn’t require n_clusters                |
-| 4  | [OPTICS](#4-optics)                                                                       | Clustering              | Advanced density clustering          | Handles varying density              | More complex to interpret           | `OPTICS()` (sklearn)                     | Outputs reachability graph                |
-| 5  | [HDBSCAN](#5-hdbscan)                                                                     | Clustering              | Hierarchical DBSCAN                  | Very good for real-world data        | External library                    | `HDBSCAN()` (hdbscan)                    | Better than DBSCAN                        |
-| 6  | [Agglomerative](#6-agglomerative)                                                         | Clustering              | Bottom-up hierarchical clustering    | Simple, visualizable                 | Not scalable                        | `AgglomerativeClustering()` (sklearn)    | Use dendrogram                            |
-| 7  | [Birch](#7-birch)                                                                         | Clustering              | Hierarchical clustering on large data| Efficient, scalable                  | May miss global structure           | `Birch()` (sklearn)                      | Use as pre-step                           |
-| 8  | [Spectral Clustering](#8-spectral-clustering)                                             | Clustering              | Graph-based method                   | Works on non-convex data             | Slow, needs full similarity matrix  | `SpectralClustering()` (sklearn)         | Good for few clusters                     |
-| 9  | [MeanShift](#9-meanshift)                                                                 | Clustering              | Sliding window density clustering    | No need to predefine clusters        | Very slow                           | `MeanShift()` (sklearn)                  | Good on smooth distributions              |
-| 10 | [Gaussian Mixture Model](#10-gaussian-mixture-model)                                      | Clustering              | Probabilistic soft clustering        | Captures overlapping clusters        | Needs to estimate #components       | `GaussianMixture()` (sklearn.mixture)    | Soft cluster assignments                  |
-| 11 | [Affinity Propagation](#11-affinity-propagation)                                          | Clustering              | Exemplar-based clustering            | No need to specify clusters          | Very memory-intensive               | `AffinityPropagation()` (sklearn)        | Slow on large datasets                    |
-| 12 | [Self-Organizing Maps (SOM)](#12-self-organizing-maps-som)                                | Clustering / Neural     | Neural map preserving topology       | Good for visualization               | Requires tuning, not in sklearn     | `MiniSom` (external lib)                 | Used for 2D projection + clustering       |
-| 13 | [Expectation Maximization (EM)](#13-expectation-maximization-em)                          | Probabilistic Optimization| Iterative method to fit GMMs       | Soft assignments, flexible           | Can converge to local optima        | Built into `GaussianMixture()`           | Used inside GMM, HMM, etc.                |
-| 14 | [Isolation Forest](#14-isolation-forest)                                                  | Anomaly Detection       | Random splits isolate outliers       | Scalable, handles high dimensions    | Not good for small datasets         | `IsolationForest()` (sklearn)            | Good default for anomaly detection        |
-| 15 | [One-Class SVM](#15-one-class-svm)                                                        | Anomaly Detection       | Learns boundary around normal class  | Effective in high-dimensions         | Sensitive to scale, slow on big data| `OneClassSVM()` (sklearn)                | Use with normalized data                  |
-| 16 | [Local Outlier Factor (LOF)](#16-local-outlier-factor-lof)                                | Anomaly Detection       | Compares local density to neighbors  | No training phase, intuitive         | Not good for extrapolation          | `LocalOutlierFactor()` (sklearn)         | Good for local anomaly detection          |
-| 17 | [Markov Methods](#17-markov-methods)                                                      | Sequence Modeling       | Transition-based temporal modeling   | Powerful for sequences               | Assumes Markov property             | `hmmlearn`, `pomegranate`                | Used in HMMs, time series                 |
-| 18 | [Deep Belief Nets (DBN)](#18-deep-belief-nets-dbn)                                        | Deep Unsupervised       | Layer-wise generative neural net     | Learns features unsupervised         | Obsolete vs modern deep learning    | `nolearn.dbn`, or PyTorch/TensorFlow     | Used before autoencoders/VAEs             |
+| #  | Model                                                                                     | Type                    | Clustering Type        | Description                          | Pros                                 | Cons                                | Example Code                             | Notes                                    |
+|----|--------------------------------------------------------------------------------------------|-------------------------|------------------------|--------------------------------------|--------------------------------------|-------------------------------------|------------------------------------------|------------------------------------------|
+| 1  | [KMeans](#1-kmeans)                                                                       | Clustering              | Centroid-based         | Centroid-based clustering            | Simple, scalable                     | Assumes spherical clusters          | `KMeans()` (sklearn)                     | Use `k-means++` init                      |
+| 2  | [MiniBatchKMeans](#2-minibatchkmeans)                                                     | Clustering              | Centroid-based         | Faster version of KMeans             | Scales to big data                   | Less accurate                       | `MiniBatchKMeans()` (sklearn)            | Use for streaming data                    |
+| 3  | [Fuzzy Clustering](#3-fuzzy-clustering)                                                   | Clustering              | Fuzzy / Soft            | Points can belong to multiple clusters| Flexible for overlapping data        | Can be hard to interpret            | `skfuzzy.cmeans()` (scikit-fuzzy)        | Returns membership matrix                |
+| 4  | [Gaussian Mixture Model](#4-gaussian-mixture-model)                                      | Clustering              | Probabilistic           | Probabilistic soft clustering        | Captures overlapping clusters        | Needs to estimate #components       | `GaussianMixture()` (sklearn.mixture)    | Soft cluster assignments                  |
+| 5  | [Expectation Maximization (EM)](#5-expectation-maximization-em)                          | Probabilistic Optimization| Probabilistic       | Iterative method to fit GMMs         | Soft assignments, flexible           | Can converge to local optima        | Built into `GaussianMixture()`           | Used inside GMM, HMM, etc.                |
+| 6  | [DBSCAN](#6-dbscan)                                                                       | Clustering              | Density-based           | Density-based clusters               | Finds arbitrary shapes               | Bad with varying densities          | `DBSCAN()` (sklearn)                     | Doesn’t require n_clusters                |
+| 7  | [OPTICS](#7-optics)                                                                       | Clustering              | Density-based           | Advanced density clustering          | Handles varying density              | More complex to interpret           | `OPTICS()` (sklearn)                     | Outputs reachability graph                |
+| 8  | [HDBSCAN](#8-hdbscan)                                                                     | Clustering              | Density-based / Hierarchical | Hierarchical DBSCAN              | Very good for real-world data        | External library                    | `HDBSCAN()` (hdbscan)                    | Better than DBSCAN                        |
+| 9  | [MeanShift](#9-meanshift)                                                                 | Clustering              | Density-based           | Sliding window density clustering    | No need to predefine clusters        | Very slow                           | `MeanShift()` (sklearn)                  | Good on smooth distributions              |
+| 10 | [CURE](#10-cure)                                                                          | Clustering              | Hierarchical + Distance | Uses representative points & shrinking | Works well on non-spherical shapes   | Complex to implement                | Custom implementation needed             | Handles outliers better than others       |
+| 11 | [Agglomerative](#11-agglomerative)                                                       | Clustering              | Hierarchical            | Bottom-up hierarchical clustering    | Simple, visualizable                 | Not scalable                        | `AgglomerativeClustering()` (sklearn)    | Use dendrogram                            |
+| 12 | [Birch](#12-birch)                                                                         | Clustering              | Hierarchical            | Hierarchical clustering on large data| Efficient, scalable                  | May miss global structure           | `Birch()` (sklearn)                      | Use as pre-step                           |
+| 13 | [Spectral Clustering](#13-spectral-clustering)                                             | Clustering              | Graph-based             | Graph-based method                   | Works on non-convex data             | Slow, needs full similarity matrix  | `SpectralClustering()` (sklearn)         | Good for few clusters                     |
+| 14 | [Affinity Propagation](#14-affinity-propagation)                                          | Clustering              | Exemplar-based          | Exemplar-based clustering            | No need to specify clusters          | Very memory-intensive               | `AffinityPropagation()` (sklearn)        | Slow on large datasets                    |
+| 15 | [Self-Organizing Maps (SOM)](#15-self-organizing-maps-som)                                | Clustering / Neural     | Neural / Topological    | Neural map preserving topology       | Good for visualization               | Requires tuning, not in sklearn     | `MiniSom` (external lib)                 | Used for 2D projection + clustering       |
+| 16 | [Isolation Forest](#16-isolation-forest)                                                  | Anomaly Detection       | Tree-based              | Random splits isolate outliers       | Scalable, handles high dimensions    | Not good for small datasets         | `IsolationForest()` (sklearn)            | Good default for anomaly detection        |
+| 17 | [One-Class SVM](#17-one-class-svm)                                                        | Anomaly Detection       | Boundary-based          | Learns boundary around normal class  | Effective in high-dimensions         | Sensitive to scale, slow on big data| `OneClassSVM()` (sklearn)                | Use with normalized data                  |
+| 18 | [Local Outlier Factor (LOF)](#18-local-outlier-factor-lof)                                | Anomaly Detection       | Density-based           | Compares local density to neighbors  | No training phase, intuitive         | Not good for extrapolation          | `LocalOutlierFactor()` (sklearn)         | Good for local anomaly detection          |
+| 19 | [Markov Methods](#19-markov-methods)                                                      | Sequence Modeling       | Temporal / Probabilistic| Transition-based temporal modeling   | Powerful for sequences               | Assumes Markov property             | `hmmlearn`, `pomegranate`                | Used in HMMs, time series                 |
+| 20 | [Deep Belief Nets (DBN)](#20-deep-belief-nets-dbn)                                        | Deep Unsupervised       | Neural-based            | Layer-wise generative neural net     | Learns features unsupervised         | Obsolete vs modern deep learning    | `nolearn.dbn`, or PyTorch/TensorFlow     | Used before autoencoders/VAEs             |
 
 ---
 ![alt text](image-2.png)
 ---
 
 ### 1. **KMeans**
-- **Math**: Minimizes sum of squared distances within each cluster (i.e., how far points are from the cluster center).
-- **Idea**: Assign each point to its nearest center → move centers to the mean of their points → repeat.
+- **Math**: Minimizes the **sum of squared distances** from each point to its cluster center.  
+  $$ J = \sum_{k=1}^{K} \sum_{x_i \in C_k} \|x_i - \mu_k\|^2 $$
+- **Idea**: Assign each point to the nearest centroid, update centroids to be the mean of assigned points, repeat.
 - **Code**:
   ```python
   from sklearn.cluster import KMeans
   model = KMeans(n_clusters=3).fit(X)
   ```
-- **Use Case**: Segmenting customers into groups, reducing image colors.
+- **Use Case**: Customer segmentation, vector quantization.
 
 ---
 
 ### 2. **MiniBatchKMeans**
-- **Math**: Same as KMeans, but uses small random subsets of data (mini-batches) to update centers.
-- **Idea**: Faster and uses less memory than full KMeans.
+- **Math**: Same as KMeans, but updates centroids using small random batches of data.
+- **Idea**: Trades off some accuracy for **massive speedup** and lower memory usage.
 - **Code**:
   ```python
   from sklearn.cluster import MiniBatchKMeans
   model = MiniBatchKMeans(n_clusters=3).fit(X)
   ```
-- **Use Case**: Clustering very large datasets in real time.
+- **Use Case**: Real-time clustering of large streams.
 
 ---
 
-### 3. **DBSCAN**
-- **Math**: Clusters dense regions, marks sparse points as noise.
-- **Idea**: Points with enough close neighbors become clusters; isolated points don’t.
+### 3. **Fuzzy Clustering**
+- **Math**: Minimizes a weighted squared error:
+  $$ J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \|x_i - c_j\|^2 $$
+  where \( u_{ij} \) is the membership of point \( x_i \) in cluster \( j \), and \( m > 1 \) controls fuzziness.
+- **Idea**: Each point **belongs to multiple clusters** with varying degrees of membership.
 - **Code**:
   ```python
-  from sklearn.cluster import DBSCAN
-  model = DBSCAN(eps=0.5, min_samples=5).fit(X)
+  from skfuzzy.cluster import cmeans
+  cntr, u, _, _, _, _, _ = cmeans(X.T, c=3, m=2.0, error=0.005, maxiter=1000)
   ```
-- **Use Case**: GPS data clustering, finding unusual patterns.
-![alt text](image-1.png)
----
-
-### 4. **OPTICS**
-- **Math**: Orders points by how easily they can be reached (reachability).
-- **Idea**: Like DBSCAN but can handle varying cluster densities.
-- **Code**:
-  ```python
-  from sklearn.cluster import OPTICS
-  model = OPTICS().fit(X)
-  ```
-- **Use Case**: More flexible density-based clustering.
+- **Use Case**: Market basket analysis, document clustering.
 
 ---
 
-### 5. **HDBSCAN**
-- **Math**: Builds a tree of cluster stability, selects most stable clusters.
-- **Idea**: Improves DBSCAN with a hierarchy and soft assignments.
-- **Code**:
-  ```python
-  import hdbscan
-  model = hdbscan.HDBSCAN().fit(X)
-  ```
-- **Use Case**: Text data, genetics, messy real-world clustering.
-
----
-
-### 6. **Agglomerative Clustering**
-- **Math**: Merge closest clusters step-by-step (bottom-up).
-- **Idea**: Start with all points separate → merge closest → stop when desired cluster count is reached.
-- **Code**:
-  ```python
-  from sklearn.cluster import AgglomerativeClustering
-  model = AgglomerativeClustering(n_clusters=3).fit(X)
-  ```
-- **Use Case**: Dendrogram visualization of hierarchy.
-
----
-
-### 7. **Birch**
-- **Math**: Builds a tree structure summarizing the dataset (CF tree).
-- **Idea**: Efficiently clusters data in one pass using compact representations.
-- **Code**:
-  ```python
-  from sklearn.cluster import Birch
-  model = Birch(n_clusters=3).fit(X)
-  ```
-- **Use Case**: Streaming or very large datasets.
-
----
-
-### 8. **Spectral Clustering**
-- **Math**: Converts data into a graph → uses eigenvectors of graph Laplacian.
-- **Idea**: Good for non-circular shapes; sees clusters via graph cuts.
-- **Code**:
-  ```python
-  from sklearn.cluster import SpectralClustering
-  model = SpectralClustering(n_clusters=3).fit(X)
-  ```
-- **Use Case**: Clustering “moon”-shaped or intertwined data.
-
----
-
-### 9. **MeanShift**
-- **Math**: Moves points toward local data density peaks.
-- **Idea**: Each point shifts until it reaches a high-density area → clusters form around those.
-- **Code**:
-  ```python
-  from sklearn.cluster import MeanShift
-  model = MeanShift().fit(X)
-  ```
-- **Use Case**: Image segmentation, finding modes.
-
----
-
-### 10. **Gaussian Mixture Model (GMM)**
-- **Math**: Uses EM (Expectation-Maximization) to fit multiple Gaussian distributions.
-- **Idea**: Each point belongs to all clusters with some probability (soft clustering).
+### 4. **Gaussian Mixture Model (GMM)**
+- **Math**: Soft clusters using Gaussian distributions:
+  $$ p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k) $$
+- **Idea**: Assigns **probabilities** of membership to each point using Expectation-Maximization (EM).
 - **Code**:
   ```python
   from sklearn.mixture import GaussianMixture
   model = GaussianMixture(n_components=3).fit(X)
   ```
-- **Use Case**: Anomaly detection, generative modeling.
+- **Use Case**: Density estimation, anomaly detection.
 
 ---
 
-### 11. **Affinity Propagation**
-- **Math**: Passes messages between points to find exemplars (cluster centers).
-- **Idea**: No need to specify number of clusters — the algorithm chooses them.
+### 5. **Expectation Maximization (EM)**
+- **Math**: Iteratively optimizes the expected log-likelihood:
+  $$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} $$
+  $$ \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
+- **Idea**: Powers soft clustering in GMMs and temporal models like HMM.
+- **Code**: Embedded in `GaussianMixture()` or HMM packages.
+- **Use Case**: Clustering, missing data imputation.
+
+---
+
+### 6. **DBSCAN**
+- **Math**: Density threshold:
+  - A point is a core if it has ≥ `min_samples` within radius `eps`.
+- **Idea**: Points with enough dense neighbors form clusters; outliers are marked as noise.
+- **Code**:
+  ```python
+  from sklearn.cluster import DBSCAN
+  model = DBSCAN(eps=0.5, min_samples=5).fit(X)
+  ```
+- **Use Case**: Spatial data, fraud detection.
+
+---
+
+### 7. **OPTICS**
+- **Math**: Orders points by reachability distance:
+  $$ \text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o)) $$
+- **Idea**: Like DBSCAN but works with **varying densities** and outputs a reachability plot.
+- **Code**:
+  ```python
+  from sklearn.cluster import OPTICS
+  model = OPTICS().fit(X)
+  ```
+- **Use Case**: Complex density structures, exploratory analysis.
+
+---
+
+### 8. **HDBSCAN**
+- **Math**: Computes mutual reachability distances and builds a hierarchy.
+- **Idea**: **Hierarchical version of DBSCAN** with better stability and soft cluster probability scores.
+- **Code**:
+  ```python
+  import hdbscan
+  model = hdbscan.HDBSCAN().fit(X)
+  ```
+- **Use Case**: High-noise real-world data like text or genomics.
+
+---
+
+### 9. **MeanShift**
+- **Math**: Moves points to the local density maximum:
+  $$ x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)} $$
+- **Idea**: Each point shifts toward the densest area nearby — no fixed number of clusters.
+- **Code**:
+  ```python
+  from sklearn.cluster import MeanShift
+  model = MeanShift().fit(X)
+  ```
+- **Use Case**: Mode seeking, image segmentation.
+
+---
+
+### 10. **CURE**
+- **Math**: Uses multiple representative points and shrinks them toward the cluster centroid.
+- **Idea**: Captures **non-spherical shapes** and handles outliers better than traditional hierarchical methods.
+- **Code**: Requires custom or third-party implementation.
+- **Use Case**: Geospatial and biological datasets.
+
+---
+
+### 11. **Agglomerative Clustering**
+- **Math**: Greedily merges clusters using linkage (e.g., average, complete):
+  $$ \text{Linkage}(A, B) = \min_{a \in A, b \in B} \|a - b\| $$
+- **Idea**: Builds a hierarchy by merging closest clusters.
+- **Code**:
+  ```python
+  from sklearn.cluster import AgglomerativeClustering
+  model = AgglomerativeClustering(n_clusters=3).fit(X)
+  ```
+- **Use Case**: Taxonomies, social network analysis.
+
+---
+
+### 12. **Birch**
+- **Math**: Uses CF (Clustering Feature) trees to compactly represent data.
+- **Idea**: Incrementally builds a tree, then clusters the leaf nodes.
+- **Code**:
+  ```python
+  from sklearn.cluster import Birch
+  model = Birch(n_clusters=3).fit(X)
+  ```
+- **Use Case**: Scalable hierarchical clustering.
+
+---
+
+### 13. **Spectral Clustering**
+- **Math**: Uses eigenvectors of the **Laplacian matrix** of a similarity graph:
+  $$ L = D - A $$
+  where \( D \) is the degree matrix and \( A \) is the adjacency matrix.
+- **Idea**: Finds clusters by cutting a graph into parts with minimal edges between them.
+- **Code**:
+  ```python
+  from sklearn.cluster import SpectralClustering
+  model = SpectralClustering(n_clusters=3).fit(X)
+  ```
+- **Use Case**: Community detection, shape-based clustering.
+
+---
+
+### 14. **Affinity Propagation**
+- **Math**: Minimizes energy using message passing between all data points.
+- **Idea**: Automatically picks **exemplar points** (cluster centers) via preference and similarity.
 - **Code**:
   ```python
   from sklearn.cluster import AffinityPropagation
   model = AffinityPropagation().fit(X)
   ```
-- **Use Case**: Clustering when you don’t know k.
+- **Use Case**: Use when number of clusters is unknown.
 
 ---
 
-### 12. **Self-Organizing Maps (SOM)**
-- **Math**: Neural network grid that adjusts weights based on data proximity.
-- **Idea**: Projects high-dimensional data onto a 2D grid while keeping structure.
+### 15. **Self-Organizing Maps (SOM)**
+- **Math**: Trains a grid of neurons using a neighborhood function:
+  $$ w_j(t+1) = w_j(t) + \alpha(t) \cdot h_{bj}(t) \cdot (x(t) - w_j(t)) $$
+- **Idea**: Projects high-dimensional data onto a 2D grid, preserving topology.
 - **Code**:
   ```python
   from minisom import MiniSom
-  som = MiniSom(5, 5, len(X[0]))
+  som = MiniSom(5, 5, X.shape[1])
   som.train(X, 100)
   ```
-- **Use Case**: Visualizing and clustering high-dimensional data.
+- **Use Case**: Visualization, anomaly detection in high dimensions.
 
 ---
 
-### 13. **Expectation Maximization (EM)**
-- **Math**: Iterates between assigning probabilities (E) and updating parameters (M).
-- **Idea**: Foundation of soft clustering — used in GMM and Hidden Markov Models.
-- **Code**: Built into GMM and HMM libraries.
-- **Use Case**: Clustering, time-series modeling.
-
----
-
-### 14. **Isolation Forest**
-- **Math**: Builds trees that isolate points by random splits.
-- **Idea**: Outliers are isolated with fewer splits.
+### 16. **Isolation Forest**
+- **Math**: Randomly partitions features; anomalies isolate faster (shorter average path length).
+- **Idea**: Outliers are easier to isolate → fewer splits → anomaly!
 - **Code**:
   ```python
   from sklearn.ensemble import IsolationForest
   model = IsolationForest().fit(X)
-  y_pred = model.predict(X)
   ```
-- **Use Case**: Anomaly detection in logs or transactions.
+- **Use Case**: Credit card fraud, intrusion detection.
 
 ---
 
-### 15. **One-Class SVM**
-- **Math**: Finds a boundary around normal data using a kernel function.
-- **Idea**: Learns what’s "normal" and flags everything else as outliers.
+### 17. **One-Class SVM**
+- **Math**: Solves:
+  $$ \min_{w, \rho} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad w \cdot \phi(x_i) \geq \rho - \xi_i $$
+- **Idea**: Learns a boundary around the "normal" class; anything outside is an outlier.
 - **Code**:
   ```python
   from sklearn.svm import OneClassSVM
-  model = OneClassSVM(kernel='rbf', nu=0.1).fit(X)
-  y_pred = model.predict(X)
+  model = OneClassSVM(kernel='rbf').fit(X)
   ```
-- **Use Case**: Anomaly detection without outlier examples.
+- **Use Case**: Novelty detection with only "normal" data.
 
 ---
 
-### 16. **Local Outlier Factor (LOF)**
-- **Math**: Compares local density of a point to its neighbors.
-- **Idea**: Points much less dense than neighbors are outliers.
+### 18. **Local Outlier Factor (LOF)**
+- **Math**: Compares density of point to its neighbors:
+  $$ LOF(p) = \frac{\sum_{o \in N_k(p)} \frac{\text{lrd}(o)}{\text{lrd}(p)}}{|N_k(p)|} $$
+  where lrd = local reachability density.
+- **Idea**: Points that are **less dense than neighbors** are flagged as outliers.
 - **Code**:
   ```python
   from sklearn.neighbors import LocalOutlierFactor
-  model = LocalOutlierFactor(n_neighbors=20)
-  y_pred = model.fit_predict(X)
+  model = LocalOutlierFactor(n_neighbors=20).fit_predict(X)
   ```
-- **Use Case**: Detecting anomalies in spatial/clustered data.
+- **Use Case**: Spotting outliers in clustered regions.
 
 ---
 
-### 17. **Markov Methods (e.g., HMM)**
-- **Math**: Models sequences with transition probabilities (P(next | current)).
-- **Idea**: Future state depends only on the current state.
+### 19. **Markov Methods (e.g., HMM)**
+- **Math**: Uses transition probabilities \( P(s_t \mid s_{t-1}) \), and emission probabilities \( P(x_t \mid s_t) \).
+- **Idea**: Models **sequences** by assuming the current state depends only on the previous one (Markov assumption).
 - **Code**:
   ```python
   from hmmlearn import hmm
   model = hmm.GaussianHMM(n_components=3).fit(X)
   ```
-- **Use Case**: Speech recognition, market modeling.
+- **Use Case**: Speech, bioinformatics, market regimes.
 
 ---
 
-### 18. **Deep Belief Nets (DBN)**
-- **Math**: Stack of RBMs trained layer by layer.
-- **Idea**: Learns features at multiple levels of abstraction.
+### 20. **Deep Belief Networks (DBN)**
+- **Math**: Stack of Restricted Boltzmann Machines (RBMs) trained via contrastive divergence.
+- **Idea**: Learns a hierarchy of features layer by layer in unsupervised fashion.
 - **Code**:
   ```python
   from nolearn.dbn import DBN
-  model = DBN(...).fit(X, y)
+  model = DBN().fit(X, y)
   ```
-- **Use Case**: Pre-training deep neural networks (historical use).
-
----
+- **Use Case**: Pretraining for deep networks (historical interest).
 
