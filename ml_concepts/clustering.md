@@ -57,9 +57,9 @@ $$ J = \sum_{k=1}^{K} \sum_{x_i \in C_k} \|x_i - \mu_k\|^2 $$
 ### 3. **Fuzzy Clustering**
 - **Math**: Minimizes a weighted squared error:
   
-  $$ J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \|x_i - c_j\|^2 $$
+$$ J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \|x_i - c_j\|^2 $$
   
-  where \( u_{ij} \) is the membership of point \( x_i \) in cluster \( j \), and \( m > 1 \) controls fuzziness.
+where \( u_{ij} \) is the membership of point \( x_i \) in cluster \( j \), and \( m > 1 \) controls fuzziness.
 - **Idea**: Each point **belongs to multiple clusters** with varying degrees of membership.
 - **Code**:
   ```python
@@ -88,7 +88,7 @@ $$ p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k) $$
 ### 5. **Expectation Maximization (EM)**
 - **Math**: Iteratively optimizes the expected log-likelihood:
   
-$$ \tdext{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} $$
+$$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} $$
 
 $$ \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
 - 
@@ -114,7 +114,7 @@ $$ \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
 ### 7. **OPTICS**
 - **Math**: Orders points by reachability distance:
   
-  $$ \text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o)) $$
+$$ \text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o)) $$
 - 
 **Idea**: Like DBSCAN but works with **varying densities** and outputs a reachability plot.
 - **Code**:
@@ -141,8 +141,8 @@ $$ \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
 ### 9. **MeanShift**
 - **Math**: Moves points to the local density maximum:
   
-  $$ x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)} $$
-- 
+$$ x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)} $$
+
 **Idea**: Each point shifts toward the densest area nearby — no fixed number of clusters.
 - **Code**:
   ```python
@@ -164,8 +164,8 @@ $$ \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
 ### 11. **Agglomerative Clustering**
 - **Math**: Greedily merges clusters using linkage (e.g., average, complete):
   
-  $$ \text{Linkage}(A, B) = \min_{a \in A, b \in B} \|a - b\| $$
-- 
+$$ \text{Linkage}(A, B) = \min_{a \in A, b \in B} \|a - b\| $$
+
 **Idea**: Builds a hierarchy by merging closest clusters.
 - **Code**:
   ```python
@@ -191,7 +191,7 @@ $$ \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
 ### 13. **Spectral Clustering**
 - **Math**: Uses eigenvectors of the **Laplacian matrix** of a similarity graph:
   
-  $$ L = D - A $$
+$$ L = D - A $$
   
   where $ D $ is the degree matrix and $ A $ is the adjacency matrix.
 - **Idea**: Finds clusters by cutting a graph into parts with minimal edges between them.
