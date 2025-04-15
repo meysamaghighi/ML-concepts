@@ -6,31 +6,31 @@ Analyzing and evaluating a machine learning (ML) model involves assessing its pe
 These measure how well a model makes predictions.
 
 ### Classification Models
-- **Accuracy**: The proportion of correct predictions. *(Best for balanced datasets)*
-- **Precision**: The proportion of true positive predictions among all positive predictions. *(Useful when false positives are costly)*
-- **Recall (Sensitivity)**: The proportion of true positives among all actual positives. *(Useful when false negatives are costly)*
-- **F1 Score**: The harmonic mean of precision and recall. *(Useful when both false positives and false negatives matter)*
-- **ROC-AUC (Receiver Operating Characteristic - Area Under Curve)**: Measures the trade-off between true positive rate and false positive rate. *(Useful for imbalanced datasets)*
-- **PR-AUC (Precision-Recall Area Under Curve)**: Evaluates models on imbalanced datasets when positive class is rare.
-- **Log Loss (Cross-Entropy Loss)**: Measures how well probability estimates align with actual labels.
+- **Accuracy**: The proportion of correct predictions. <span style="color:#90EE90">(Best for balanced datasets)</span>
+- **Precision**: The proportion of true positive predictions among all positive predictions. <span style="color:#FFD700">(Useful when false positives are costly)</span>
+- **Recall (Sensitivity)**: The proportion of true positives among all actual positives. <span style="color:#00CED1">(Useful when false negatives are costly)</span>
+- **F1 Score**: The harmonic mean of precision and recall. <span style="color:#FF6347">(Useful when both false positives and false negatives matter)</span>
+- **ROC-AUC (Receiver Operating Characteristic - Area Under Curve)**: Measures the trade-off between true positive rate and false positive rate. <span style="color:#DA70D6">(Useful for imbalanced datasets)</span>
+- **PR-AUC (Precision-Recall Area Under Curve)**: Evaluates models on imbalanced datasets when positive class is rare. <span style="color:#FFA07A">(Useful when positive class is rare)</span>
+- **Log Loss (Cross-Entropy Loss)**: Measures how well probability estimates align with actual labels. <span style="color:#7FFFD4">(Useful for probabilistic models)</span>
 
 ### Regression Models
-- **Mean Squared Error (MSE)**: Penalizes larger errors more than smaller ones.
-- **Root Mean Squared Error (RMSE)**: The square root of MSE, interpretable in original units.
-- **Mean Absolute Error (MAE)**: Measures absolute differences, less sensitive to outliers than MSE.
-- **R² Score (Coefficient of Determination)**: Measures how well predictions explain variance in data.
-- **Adjusted R²**: Adjusts for number of features in a regression model.
-- **Mean Absolute Percentage Error (MAPE)**: Measures percentage deviation between predicted and actual values.
+- **Mean Squared Error (MSE)**: Penalizes larger errors more than smaller ones. <span style="color:#DC143C">(Sensitive to outliers)</span>
+- **Root Mean Squared Error (RMSE)**: The square root of MSE, interpretable in original units. <span style="color:#6A5ACD">(Good for interpretability)</span>
+- **Mean Absolute Error (MAE)**: Measures absolute differences, less sensitive to outliers than MSE. <span style="color:#3CB371">(Robust to outliers)</span>
+- **R² Score (Coefficient of Determination)**: Measures how well predictions explain variance in data. <span style="color:#1E90FF">(Useful for overall fit)</span>
+- **Adjusted R²**: Adjusts for number of features in a regression model. <span style="color:#B8860B">(Better for feature-rich models)</span>
+- **Mean Absolute Percentage Error (MAPE)**: Measures percentage deviation between predicted and actual values. <span style="color:#FF8C00">(Useful when scale matters)</span>
 
 ### Clustering Models
-- **Silhouette Score**: Measures how similar a sample is to its own cluster compared to other clusters.
-- **Calinski-Harabasz Index**: Evaluates cluster density and separation.
-- **Davies-Bouldin Index**: Measures cluster compactness and separation.
-- **Adjusted Rand Index (ARI)**: Measures the similarity between predicted and true clustering.
+- **Silhouette Score**: Measures how similar a sample is to its own cluster compared to other clusters. <span style="color:#32CD32">(Good for evaluating cluster separation)</span>
+- **Calinski-Harabasz Index**: Evaluates cluster density and separation. <span style="color:#00BFFF">(Useful for overall cluster quality)</span>
+- **Davies-Bouldin Index**: Measures cluster compactness and separation. <span style="color:#BA55D3">(Lower is better)</span>
+- **Adjusted Rand Index (ARI)**: Measures the similarity between predicted and true clustering. <span style="color:#F08080">(Useful with labeled data)</span>
 
 ### Ranking Models
-- **Normalized Discounted Cumulative Gain (NDCG)**: Measures ranking quality, higher scores mean better ranking.
-- **Mean Reciprocal Rank (MRR)**: Evaluates how quickly relevant items appear in a ranked list.
+- **Normalized Discounted Cumulative Gain (NDCG)**: Measures ranking quality, higher scores mean better ranking. <span style="color:#FF69B4">(Good for relevance-sensitive tasks)</span>
+- **Mean Reciprocal Rank (MRR)**: Evaluates how quickly relevant items appear in a ranked list. <span style="color:#20B2AA">(Useful for top-k recommendations)</span>
 
 ## 2. Model Robustness
 These techniques test a model’s reliability under different conditions.
@@ -66,6 +66,7 @@ Assesses model speed and resource usage.
 ## 6. Business & Domain-Specific Metrics
 Tailored metrics for specific applications.
 
-- **Churn Prediction** (Lift & Gains Chart, Profit Curve)
-- **Fraud Detection** (Precision-Recall Curve, F1 Score)
-- **Recommendation Systems** (Hit Rate, Coverage, Novelty)
+- **Churn Prediction** (<span style="color:#7CFC00">Lift & Gains Chart, Profit Curve</span>)
+- **Fraud Detection** (<span style="color:#FF4500">Precision-Recall Curve, F1 Score</span>)
+- **Recommendation Systems** (<span style="color:#00FA9A">Hit Rate, Coverage, Novelty</span>)
+
