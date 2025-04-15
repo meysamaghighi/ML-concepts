@@ -19,6 +19,7 @@
 | 15 | [QDA](#15-qda)                        | Probabilistic     | Quadratic Discriminant Analysis                    | Captures non-linear class boundaries              | Assumes Gaussian distribution per class          | `QuadraticDiscriminantAnalysis()` (sklearn)     | Use when classes are well-separated and Gaussian |
 | 16 | [Gaussian Process Classifier](#16-gaussian-process-classifier) | Probabilistic     | Bayesian classifier using Gaussian Processes for class probability | Provides uncertainty estimates, flexible decision boundary | Computationally expensive, not scalable to large data       | `GaussianProcessClassifier()` (sklearn)              | Best for small datasets with uncertainty needs |
 ---
+## Comparison of classification algorithms
 ![alt text](image-3.png)
 ---
 

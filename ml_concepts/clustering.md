@@ -1,11 +1,11 @@
-## 📌 Unsupervised Learning Models
+## 📌 Unsupervised Learning Models (clustering and anomaly detection)
 
 | #  | Model                                                                                     | Type                    | Clustering Type        | Description                          | Pros                                 | Cons                                | Example Code                             | Notes                                    |
 |----|--------------------------------------------------------------------------------------------|-------------------------|------------------------|--------------------------------------|--------------------------------------|-------------------------------------|------------------------------------------|------------------------------------------|
 | 1  | [KMeans](#1-kmeans)                                                                       | Clustering              | Centroid-based         | Centroid-based clustering            | Simple, scalable                     | Assumes spherical clusters          | `KMeans()` (sklearn)                     | Use `k-means++` init                      |
 | 2  | [MiniBatchKMeans](#2-minibatchkmeans)                                                     | Clustering              | Centroid-based         | Faster version of KMeans             | Scales to big data                   | Less accurate                       | `MiniBatchKMeans()` (sklearn)            | Use for streaming data                    |
 | 3  | [Fuzzy Clustering](#3-fuzzy-clustering)                                                   | Clustering              | Fuzzy / Soft            | Points can belong to multiple clusters| Flexible for overlapping data        | Can be hard to interpret            | `skfuzzy.cmeans()` (scikit-fuzzy)        | Returns membership matrix                |
-| 4  | [Gaussian Mixture Model](#4-gaussian-mixture-model)                                      | Clustering              | Probabilistic           | Probabilistic soft clustering        | Captures overlapping clusters        | Needs to estimate #components       | `GaussianMixture()` (sklearn.mixture)    | Soft cluster assignments                  |
+| 4  | [Gaussian Mixture Model (GMM)](#4-gaussian-mixture-model-gmm)                                      | Clustering              | Probabilistic           | Probabilistic soft clustering        | Captures overlapping clusters        | Needs to estimate #components       | `GaussianMixture()` (sklearn.mixture)    | Soft cluster assignments                  |
 | 5  | [Expectation Maximization (EM)](#5-expectation-maximization-em)                          | Probabilistic Optimization| Probabilistic       | Iterative method to fit GMMs         | Soft assignments, flexible           | Can converge to local optima        | Built into `GaussianMixture()`           | Used inside GMM, HMM, etc.                |
 | 6  | [DBSCAN](#6-dbscan)                                                                       | Clustering              | Density-based           | Density-based clusters               | Finds arbitrary shapes               | Bad with varying densities          | `DBSCAN()` (sklearn)                     | Doesn’t require n_clusters                |
 | 7  | [OPTICS](#7-optics)                                                                       | Clustering              | Density-based           | Advanced density clustering          | Handles varying density              | More complex to interpret           | `OPTICS()` (sklearn)                     | Outputs reachability graph                |
@@ -20,12 +20,15 @@
 | 16 | [Isolation Forest](#16-isolation-forest)                                                  | Anomaly Detection       | Tree-based              | Random splits isolate outliers       | Scalable, handles high dimensions    | Not good for small datasets         | `IsolationForest()` (sklearn)            | Good default for anomaly detection        |
 | 17 | [One-Class SVM](#17-one-class-svm)                                                        | Anomaly Detection       | Boundary-based          | Learns boundary around normal class  | Effective in high-dimensions         | Sensitive to scale, slow on big data| `OneClassSVM()` (sklearn)                | Use with normalized data                  |
 | 18 | [Local Outlier Factor (LOF)](#18-local-outlier-factor-lof)                                | Anomaly Detection       | Density-based           | Compares local density to neighbors  | No training phase, intuitive         | Not good for extrapolation          | `LocalOutlierFactor()` (sklearn)         | Good for local anomaly detection          |
-| 19 | [Markov Methods](#19-markov-methods)                                                      | Sequence Modeling       | Temporal / Probabilistic| Transition-based temporal modeling   | Powerful for sequences               | Assumes Markov property             | `hmmlearn`, `pomegranate`                | Used in HMMs, time series                 |
-| 20 | [Deep Belief Nets (DBN)](#20-deep-belief-nets-dbn)                                        | Deep Unsupervised       | Neural-based            | Layer-wise generative neural net     | Learns features unsupervised         | Obsolete vs modern deep learning    | `nolearn.dbn`, or PyTorch/TensorFlow     | Used before autoencoders/VAEs             |
 
 ---
-![alt text](image-2.png)
+## Comparison of clustering algorithms
+![Comp](image-2.png)
 ---
+## Comparison of anomaly detection algorithms
+![alt text](image-4.png)
+---
+
 
 ### 1. **KMeans**
 - **Math**: Minimizes the **sum of squared distances** from each point to its cluster center.  
@@ -55,11 +58,12 @@ $$ J = \sum_{k=1}^{K} \sum_{x_i \in C_k} \|x_i - \mu_k\|^2 $$
 ---
 
 ### 3. **Fuzzy Clustering**
+Also called *soft clustering* or *soft k-means*.
 - **Math**: Minimizes a weighted squared error:
   
 $$ J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \|x_i - c_j\|^2 $$
   
-where \( u_{ij} \) is the membership of point \( x_i \) in cluster \( j \), and \( m > 1 \) controls fuzziness.
+where $ u_{ij} $ is the membership of point $ x_i $ in cluster $ j $, and $ m > 1 $ controls fuzziness.
 - **Idea**: Each point **belongs to multiple clusters** with varying degrees of membership.
 - **Code**:
   ```python
@@ -73,7 +77,11 @@ where \( u_{ij} \) is the membership of point \( x_i \) in cluster \( j \), and 
 ### 4. **Gaussian Mixture Model (GMM)**
 - **Math**: Soft clusters using Gaussian distributions:
   
-$$ p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k) $$
+  $$
+  p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)
+  $$
+
+  where $\pi_k$ is the mixing coefficient for the $k$-th component (i.e., the prior probability of choosing cluster $k$), and $\sum_k \pi_k = 1$.
 
 - **Idea**: Assigns **probabilities** of membership to each point using Expectation-Maximization (EM).
 - **Code**:
@@ -91,7 +99,7 @@ $$ p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k) $$
 $$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} \newline
 \text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
 
-**Idea**: Powers soft clustering in GMMs and temporal models like HMM.
+- **Idea**: Powers soft clustering in GMMs and temporal models like HMM.
 - **Code**: Embedded in `GaussianMixture()` or HMM packages.
 - **Use Case**: Clustering, missing data imputation.
 
@@ -101,6 +109,7 @@ $$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)
 - **Math**: Density threshold:
   - A point is a core if it has ≥ `min_samples` within radius `eps`.
 - **Idea**: Points with enough dense neighbors form clusters; outliers are marked as noise.
+- **Note**: DBSCAN is scale-variant, i.e., if you multiply data by x2, x3, etc., the results change(https://blog.dailydoseofds.com/p/hdbscan-vs-dbscan). This is fixed in HDBSCAN.
 - **Code**:
   ```python
   from sklearn.cluster import DBSCAN
@@ -114,8 +123,8 @@ $$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)
 - **Math**: Orders points by reachability distance:
   
 $$ \text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o)) $$
-- 
-**Idea**: Like DBSCAN but works with **varying densities** and outputs a reachability plot.
+
+- **Idea**: Like DBSCAN but works with **varying densities** and outputs a reachability plot.
 - **Code**:
   ```python
   from sklearn.cluster import OPTICS
@@ -142,7 +151,7 @@ $$ \text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o)) $$
   
 $$ x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)} $$
 
-**Idea**: Each point shifts toward the densest area nearby — no fixed number of clusters.
+- **Idea**: Each point shifts toward the densest area nearby — no fixed number of clusters.
 - **Code**:
   ```python
   from sklearn.cluster import MeanShift
@@ -165,7 +174,7 @@ $$ x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)} $$
   
 $$ \text{Linkage}(A, B) = \min_{a \in A, b \in B} \|a - b\| $$
 
-**Idea**: Builds a hierarchy by merging closest clusters.
+- **Idea**: Builds a hierarchy by merging closest clusters.
 - **Code**:
   ```python
   from sklearn.cluster import AgglomerativeClustering
@@ -272,26 +281,3 @@ $$ LOF(p) = \frac{\sum_{o \in N_k(p)} \frac{\text{lrd}(o)}{\text{lrd}(p)}}{|N_k(
 - **Use Case**: Spotting outliers in clustered regions.
 
 ---
-
-### 19. **Markov Methods (e.g., HMM)**
-- **Math**: Uses transition probabilities $ P(s_t \mid s_{t-1}) $, and emission probabilities $ P(x_t \mid s_t) $.
-- **Idea**: Models **sequences** by assuming the current state depends only on the previous one (Markov assumption).
-- **Code**:
-  ```python
-  from hmmlearn import hmm
-  model = hmm.GaussianHMM(n_components=3).fit(X)
-  ```
-- **Use Case**: Speech, bioinformatics, market regimes.
-
----
-
-### 20. **Deep Belief Networks (DBN)**
-- **Math**: Stack of Restricted Boltzmann Machines (RBMs) trained via contrastive divergence.
-- **Idea**: Learns a hierarchy of features layer by layer in unsupervised fashion.
-- **Code**:
-  ```python
-  from nolearn.dbn import DBN
-  model = DBN().fit(X, y)
-  ```
-- **Use Case**: Pretraining for deep networks (historical interest).
-
