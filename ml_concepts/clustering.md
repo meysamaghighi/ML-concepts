@@ -21,7 +21,8 @@
 | 17 | [Markov Methods](#17-markov-methods)                                                      | Sequence Modeling       | Transition-based temporal modeling   | Powerful for sequences               | Assumes Markov property             | `hmmlearn`, `pomegranate`                | Used in HMMs, time series                 |
 | 18 | [Deep Belief Nets (DBN)](#18-deep-belief-nets-dbn)                                        | Deep Unsupervised       | Layer-wise generative neural net     | Learns features unsupervised         | Obsolete vs modern deep learning    | `nolearn.dbn`, or PyTorch/TensorFlow     | Used before autoencoders/VAEs             |
 
-
+---
+![alt text](image-2.png)
 ---
 
 ### 1. **KMeans**
@@ -57,7 +58,7 @@
   model = DBSCAN(eps=0.5, min_samples=5).fit(X)
   ```
 - **Use Case**: GPS data clustering, finding unusual patterns.
-
+![alt text](image-1.png)
 ---
 
 ### 4. **OPTICS**

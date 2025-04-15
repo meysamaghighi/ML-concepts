@@ -63,4 +63,5 @@
     - (single-dimensional) A model that gives you a normal distribution for the values of the function at every possible input x.
     - This is why we get 95% confidence interval
     ![alt text](image.png)
+- Centroid in KMeans is the center of mass.
 - 
