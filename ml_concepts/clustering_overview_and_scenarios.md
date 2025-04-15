@@ -135,6 +135,6 @@
 
 ### **Scenario 7**: Color-based image segmentation—reduce image to dominant tones.
 
-✅ **Best Choice**: **Mean Shift**
+✅ **Best Choice**: **Mean Shift** 
 — Color clusters often follow natural density peaks. You don’t want to guess k. Mean Shift naturally finds these “modes” and gives nice segmentation.
 
