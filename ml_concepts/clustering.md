@@ -201,6 +201,7 @@
 
 ### 15. **Self-Organizing Maps (SOM)**
 - **Math**: Trains a grid of neurons using a neighborhood function:
+
 $$ w_j(t+1) = w_j(t) + \alpha(t) \cdot h_{bj}(t) \cdot (x(t) - w_j(t)) $$
 - **Idea**: Projects high-dimensional data onto a 2D grid, preserving topology.
 - **Code**:
