@@ -23,7 +23,42 @@ def f(a: int, b: int) -> int:
     return a + b
 ```
 - Array rotation w/ O(1) space: use reverse function.
-- Use `tuple` to add lists to sets. Use `sorted` to handle duplicates.
+- Sort list:
+```python
+nums: List[int]
+nums.sort()
+```
+- Use `tuple` to add lists to sets. Use `sorted` to handle duplicates: `triplet = tuple(sorted([s, nums[low], nums[high]]))`
 - Matrix is usually represented as a `List[List[int]]` list of lists. `matrix[i][j]` gives row i, column j.
 - Count letters in a string: `s.count(c)`.
 - Do k:th factor in `O(sqrt(n))` time.
+- Convert string to lower case: `s = s.lower()`
+- Check if string/characters are alphanumeric:
+    - `c.isalnum()`
+    - `s.isalnum()`
+- Reverse of a string/list `s`--> `s[::-1]`
+- **Maximum subarray problem** is solved by **Kadane's algorithm** in O(n). Idea is to keep current_sum and best_sum, and condition on whether j belongs to best found from 1 to j.
+```python
+def max_subarray(numbers):
+    """Find the largest sum of any contiguous subarray."""
+    best_sum = float('-inf')
+    current_sum = 0
+    for x in numbers:
+        current_sum = max(x, current_sum + x)
+        best_sum = max(best_sum, current_sum)
+    return best_sum
+```
+- Subset sum problem (does S have a subset w/ sum X?) is NP-complete.
+- **Stack** in python is list:
+```python
+stack = []
+# push
+stack.append(10)
+# pop
+top = stack.pop()
+# peek
+top = stack[-1]
+# is empty
+empty = len(stack) == 0
+```
+- 
