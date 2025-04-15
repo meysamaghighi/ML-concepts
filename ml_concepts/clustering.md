@@ -270,7 +270,8 @@ $$ \min_{w, \rho} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad w \cdot \phi(x_i) 
 ### 18. **Local Outlier Factor (LOF)**
 - **Math**: Compares density of point to its neighbors:
 
-$$ LOF(p) = \frac{\sum_{o \in N_k(p)} \frac{\text{lrd}(o)}{\text{lrd}(p)}}{|N_k(p)|} $$
+$$ \text{LOF}(p) = \frac{\sum_{o \in N_k(p)} \frac{\text{lrd}(o)}{\text{lrd}(p)}}{|N_k(p)|} $$
+
   where lrd = local reachability density.
 - **Idea**: Points that are **less dense than neighbors** are flagged as outliers.
 - **Code**:
