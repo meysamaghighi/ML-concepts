@@ -109,7 +109,7 @@ These measure how well a model makes predictions.
 
 - **R² Score** <span style="color:#1E90FF">(Useful for overall fit)</span>
   - **Explanation**: Proportion of variance explained.
-  - **Formula**: $1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}} $
+  - **Formula**: $1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}}$
   - **Python**:
     ```python
     from sklearn.metrics import r2_score
@@ -135,7 +135,7 @@ These measure how well a model makes predictions.
   <span style="color:#32CD32">(Good for evaluating cluster separation)</span>  
   **Formula**:  
   For a sample $ i $:
-  $ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}$
+  $s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}$
   where $ a(i) $ is the average distance to points in the same cluster, and $ b(i) $ is the minimum average distance to points in other clusters.
 
   ```python
@@ -147,7 +147,7 @@ These measure how well a model makes predictions.
   Evaluates the ratio of between-cluster dispersion to within-cluster dispersion.  
   <span style="color:#00BFFF">(Useful for overall cluster quality)</span>  
   **Formula**:
- $  \text{CH} = \frac{\text{Tr}(B_k)}{\text{Tr}(W_k)} \cdot \frac{N - k}{k - 1} $
+ $\text{CH} = \frac{\text{Tr}(B_k)}{\text{Tr}(W_k)} \cdot \frac{N - k}{k - 1}$
   where $ B_k $ and $ W_k $ are between and within-cluster dispersion matrices, $ N $ is the number of samples, and $ k $ is the number of clusters.
 
   ```python
