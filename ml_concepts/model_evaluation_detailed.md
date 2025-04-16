@@ -160,7 +160,7 @@ These measure how well a model makes predictions.
   <span style="color:#BA55D3">(Lower is better)</span>  
   **Formula**:
  $\text{DB} = \frac{1}{k} \sum_{i=1}^{k} \max_{j \neq i} \left( \frac{\sigma_i + \sigma_j}{d(c_i, c_j)} \right)$
-  where $ \sigma_i $ is the average distance of all points in cluster $ i $ to centroid $ c_i $, and $ d(c_i, c_j) $ is the distance between centroids.
+  where $\sigma_i$ is the average distance of all points in cluster $i$ to centroid $c_i$, and $d(c_i, c_j)$ is the distance between centroids.
 
   ```python
   from sklearn.metrics import davies_bouldin_score
