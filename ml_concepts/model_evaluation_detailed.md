@@ -5,6 +5,7 @@ Analyzing and evaluating a machine learning (ML) model involves assessing its pe
 ## 1. Performance Metrics
 These measure how well a model makes predictions.
 
+---
 ### Classification Models
 
 - **Accuracy** <span style="color:#90EE90">(Best for balanced datasets)</span>
@@ -69,6 +70,14 @@ These measure how well a model makes predictions.
     log_loss(y_true, y_prob)
     ```
 
+- **Equal Error Rate (EER)** (Used in biometric systems and verification tasks)
+
+  - **Explanation**: The point where the false acceptance rate (FAR) equals the false rejection rate (FRR).
+  - **Python**:
+    ```python
+    # Custom computation using ROC or DET curve intersection
+    ```
+
 ---
 ### Regression Models
 
@@ -118,10 +127,7 @@ These measure how well a model makes predictions.
     np.mean(np.abs((y_true - y_pred) / y_true)) * 100
     ```
 
-Here is your updated Markdown section with **brief explanations**, **mathematical formulas**, and **Python code examples** for each **clustering metric**:
-
 ---
-
 ### Clustering Models
 
 - **Silhouette Score**:  
@@ -221,6 +227,14 @@ Here is your updated Markdown section with **brief explanations**, **mathematica
   print(f"MRR: {score:.3f}")
   ```
 
+- **Mean Average Precision (MAP)** (Useful for ranking in retrieval and recommendation)
+  - **Explanation**: Average of precision values at ranks where relevant items appear, averaged over all queries.
+  - **Formula**: $\text{MAP} = \frac{1}{|Q|} \sum\_{q \in Q} \text{AP}(q)$
+  - **Python**:
+    ```python
+    from sklearn.metrics import average_precision_score
+    # Use per-query then average if multiple queries exist
+    ```
 
 ## 2. Model Robustness
 These techniques test how well a model holds up under different data or distributional conditions.

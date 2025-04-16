@@ -13,6 +13,7 @@ These measure how well a model makes predictions.
 - **ROC-AUC (Receiver Operating Characteristic - Area Under Curve)**: Measures the trade-off between true positive rate and false positive rate. <span style="color:#DA70D6">(Useful for imbalanced datasets)</span>
 - **PR-AUC (Precision-Recall Area Under Curve)**: Evaluates models on imbalanced datasets when positive class is rare. <span style="color:#FFA07A">(Useful when positive class is rare)</span>
 - **Log Loss (Cross-Entropy Loss)**: Measures how well probability estimates align with actual labels. <span style="color:#7FFFD4">(Useful for probabilistic models)</span>
+- **Equal Error Rate (EER)**: The point where false positive rate equals false negative rate. <span style="color:#D2691E">(Used in biometric systems and verification tasks)</span>
 
 ### Regression Models
 - **Mean Squared Error (MSE)**: Penalizes larger errors more than smaller ones. <span style="color:#DC143C">(Sensitive to outliers)</span>
@@ -31,6 +32,7 @@ These measure how well a model makes predictions.
 ### Ranking Models
 - **Normalized Discounted Cumulative Gain (NDCG)**: Measures ranking quality, higher scores mean better ranking. <span style="color:#FF69B4">(Good for relevance-sensitive tasks)</span>
 - **Mean Reciprocal Rank (MRR)**: Evaluates how quickly relevant items appear in a ranked list. <span style="color:#20B2AA">(Useful for top-k recommendations)</span>
+- **Mean Average Precision (MAP)**: The mean of the average precision scores for all queries. <span style="color:#ADFF2F">(Popular in information retrieval and recommender systems)</span>
 
 ## 2. Model Robustness
 These techniques test a model’s reliability under different conditions.
@@ -68,5 +70,11 @@ Tailored metrics for specific applications.
 
 - **Churn Prediction** (<span style="color:#7CFC00">Lift & Gains Chart, Profit Curve</span>)
 - **Fraud Detection** (<span style="color:#FF4500">Precision-Recall Curve, F1 Score</span>)
-- **Recommendation Systems** (<span style="color:#00FA9A">Hit Rate, Coverage, Novelty</span>)
+- **Recommendation Systems** (<span style="color:#00FA9A">Hit Rate, Coverage, Novelty, MAP, MRR</span>)
 
+## 7. Experimentation & Causal Inference
+Evaluates model improvements and their real-world impact.
+
+- **A/B Testing**: Compares two model versions (A and B) to test improvements using statistical significance.
+- **Lift Analysis**: Measures the gain from targeting users or making interventions.
+- **Causal Impact Modeling**: Estimates the effect of changes in the absence of randomized experiments.
