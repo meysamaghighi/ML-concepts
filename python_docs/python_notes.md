@@ -61,4 +61,39 @@ top = stack[-1]
 # is empty
 empty = len(stack) == 0
 ```
-- 
+- Merge sorted arrays in-place: start from the end!
+- Use `OrderedDict` when you need insertion order in a dictionary (it's a subclass of `dict`). Use in LRU/LFU Cache, First Unique Element, Log System or counter.
+    - **O(1)** access, update and deletion with maintained order.
+```python
+from collections import OrderedDict
+
+od = OrderedDict()
+od['a'] = 1
+od['b'] = 2
+od.move_to_end('a')     # Moves 'a' to the end
+od.popitem(last=False)  # Removes 'b' (the first inserted key)
+```
+- `Counter` usage:
+```python
+>>> from collections import Counter
+>>> c = Counter("banana")
+>>> c
+Counter({'a': 3, 'n': 2, 'b': 1})
+>>> c.most_common(1)
+[('a', 3)]
+>>> c.most_common(2)
+[('a', 3), ('n', 2)]
+>>> c.most_common(1)[0][0]
+'a'
+```
+- Strings are immutable:
+```python
+ans = "-" * len(s)
+ans[2 * i] = char1  # ❌ won't work
+```
+Correct form:
+```python
+ans = [""] * len(s)
+...
+return ''.join(ans)
+```
