@@ -32,9 +32,13 @@ print(filtered)  # ['Natural', 'Language', 'Processing', 'amazing', '.']
 #### **Statistical Language Modeling**
 
 A language model assigns a probability to a sequence of words. For example, a bigram model approximates:
+$ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $
 
 $ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $
 
+$$ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $$
+
+$ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $
 This says: "The probability of a sentence is the product of probabilities of each word given the one before it."
 
 Smoothing (like Laplace smoothing) is used to handle zero probabilities when a bigram never appeared in training data.
