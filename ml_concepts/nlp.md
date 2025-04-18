@@ -32,13 +32,9 @@ print(filtered)  # ['Natural', 'Language', 'Processing', 'amazing', '.']
 #### **Statistical Language Modeling**
 
 A language model assigns a probability to a sequence of words. For example, a bigram model approximates:
-$ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $
-
-$ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $
 
 $$ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $$
 
-$ P(w_1, w_2, ..., w_n) \approx \prod_{i=1}^{n} P(w_i | w_{i-1}) $
 This says: "The probability of a sentence is the product of probabilities of each word given the one before it."
 
 Smoothing (like Laplace smoothing) is used to handle zero probabilities when a bigram never appeared in training data.
@@ -64,7 +60,7 @@ for token in doc:
 
 Used to find important words in documents:
 
-$ tfidf(t, d) = tf(t, d) \cdot \log\left(\frac{N}{df(t)}\right) $
+$$ tfidf(t, d) = tf(t, d) \cdot \log\left(\frac{N}{df(t)}\right) $$
 
 Where:
 - $tf(t, d)$ = term frequency of word *t* in document *d*
@@ -120,7 +116,7 @@ print(model.wv['NLP'])
 
 GloVe learns word vectors by looking at how often words co-occur in a large corpus. Its cost function is:
 
-$ J = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2 $
+$$ J = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2 $$
 
 Where $X_{ij}$ is how often word $i$ appears near word $j$.
 
@@ -146,13 +142,13 @@ outputs = model(**inputs)
 
 These models handle sequences by maintaining a hidden state. They work well for small data but struggle with long dependencies.
 
-$ h_t = f(Wx_t + Uh_{t-1} + b) $
+$$ h_t = f(Wx_t + Uh_{t-1} + b) $$
 
 #### **Attention Mechanism**
 
 Instead of only using the last hidden state, attention looks at all words and weighs them based on relevance:
 
-$ Attention(Q, K, V) = softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)V $
+$$ Attention(Q, K, V) = softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)V $$
 
 #### **Transformers**
 
