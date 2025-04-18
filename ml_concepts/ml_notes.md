@@ -64,4 +64,37 @@
     - This is why we get 95% confidence interval
     ![alt text](image.png)
 - Centroid in KMeans is the center of mass.
+- **Markov Networks (MRF - Markov Random Field)** are not functions of time (not temporal), whereas Markov Chains, HMMs, MDPs, etc. are functions of time.
+    - MRF does describe **state transition**, it models **joint distributions** over a set of variables at a single time step.
+- **MCMC (Markov Chain Monte Carlo)** is a sampling method.
+    - It creates a chain of samples from out distribution where each new sample depends only on the previous one. Overtime, the samples **approximate the true distribution**.
+    - This is a **tool for inference, not synthetic data generation**!
+    - **Gibbs sampling** is a special case of MCMC, used when direct sampling from the join distribution is hard but sampling from the **conditional distribution**, i.e., P(A|B), is more practical.
+    - Two common goals w/ Gibbs:
+        1. Approximate expectations: $\mathbb{E}[f(X)]$ by $X_1, X_2, \ldots, X_n$ samples from $P(X|\text{data})$.
+        1. Estimate the posterior: $P(\theta|\text{data})$
+    - In standard ML, we don't need MCMC/Gibbs, there we minimize a loss function using optimization and get point estimates of model parameters.
+    - Gibbs applications: LDA (Latent, Dirichlet Allocation), Medical diagnosis, image denoising, recommender systems.
+Absolutely, Meysam! Here’s a **compact summary** of Conditional Random Fields (CRFs) with highlights and a **minimal code snippet**:
+- **Conditional Random Fields (CRFs)** are **discriminative probabilistic models** used for **structured prediction** tasks.
+    - They model the **conditional probability** \( P(Y|X) \) of output variables (like label sequences) given input data.
+    - CRFs are powerful for tasks where **outputs are interdependent**, such as **Named Entity Recognition (NER)**, **POS tagging**, and **image segmentation**.
+    - Unlike logistic regression (which predicts labels independently), CRFs **consider dependencies between labels** (e.g., the label at position \( i \) depends on the label at \( i-1 \)).
+    - CRFs are trained by **maximizing the conditional log-likelihood**, and prediction is typically done using the **Viterbi algorithm**.
+    - They’re often used with **feature functions** (like word identity, capitalization, etc.) and sometimes stacked on top of **neural networks** for improved performance.
+- **Viterbi algorithm** is a **dynamic programming algorithm** used to find the **most likely sequence of hidden states** (called the Viterbi path) in a model — typically a Hidden Markov Model (HMM) or a CRF.
+- In NLP, **Named Entity Recognition (NER)** is to give each word a semantic label (Person names (PER),  Locations (LOC), Organizations (ORG), etc.)
+- **NLP Sequence labeling**:
+**Sentence:**  
+👉 `"John gave Mary a book in London on Tuesday."`
+
+| Task Type | Focus | Output |
+|-----------|-------|--------|
+| **POS (Part-of-Speech) tagging** | **Syntax:** What is each word grammatically? | `NNP VBD NNP DT NN IN NNP IN NNP` |
+| **NER (Named Entity Recognition)** | **Semantics:** Is the word part of a real-world entity? | `John: PERSON, Mary: PERSON, London: LOC, Tuesday: DATE` |
+| **Chunking (Shallow Parsing)** | **Groups:** Which words form a meaningful unit? | `[(John), (gave), (Mary), (a book), (in London), (on Tuesday)]` |
+| **Dependency Parsing** | **Structure:** How do words relate grammatically? | `John → gave (subject), Mary → gave (indirect object), book → gave (direct object)` |
+| **SRL (Semantic Role Labeling)** | **Roles:** Who is doing what to whom? | `Agent: John, Action: gave, Recipient: Mary, Theme: book, Location: London, Time: Tuesday` |
+| **Coreference** | **Tracking:** Which mentions refer to the same thing? | `"John gave Mary a book. He..."` → `"John"` and `"He"` are linked |
+
 - 

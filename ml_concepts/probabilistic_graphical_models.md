@@ -209,6 +209,3 @@ gibbs_sampler(10)
 - Easier to implement than Metropolis-Hastings.
 - Can be slow to mix (slow convergence).
 
----
-
-Would you like this compiled into a Markdown file or visual summary (e.g., concept map or table)?

@@ -33,26 +33,26 @@
 - ✅ Clustering algorithms
 - ✅ K-means clustering
 - ✅ Anomaly detection
-- ❌ Markov methods
+- ✅ Markov methods
 - ✅ DBSCAN
 - ✅ Self-organizing maps
 - ❌ Deep belief nets
-- ❌ Expectation maximization (EM)
+- ✅ Expectation maximization (EM)
 - ✅ Gaussian mixture models (GMM)
-- ❌ Clustering evaluation metrics
+- ✅ Clustering evaluation metrics
 
 ---
 
-## 🔗 Probabilistic Graphical Models
+## 🔗 Probabilistic Graphical Models (PGM)
 
-- ❌ Bayesian networks
-- ❌ Markov networks
+- ✅ Bayesian networks
+- ✅ Markov networks (MRF)
 - ❌ Variational inference
-- ❌ Markov chain
-- ❌ Monte Carlo methods
-- ❌ Latent Dirichlet Allocation (LDA)
+- ✅ Markov chain
+- ✅ Monte Carlo methods
+- ✅ Latent Dirichlet Allocation (LDA)
 - ❌ Belief propagation
-- ❌ Gibbs sampling
+- ✅ Gibbs sampling (special case of MCMC)
 
 ---
 
@@ -69,11 +69,11 @@
 
 ## ⏱️ Sequential Models
 
-- ❌ Hidden Markov Models (HMM)
-- ❌ Conditional Random Fields (CRF)
-- ❌ Recurrent Neural Networks (RNN)
-- ❌ Named Entity Recognition (NER)
-- ❌ Part-of-Speech (POS) tagging
+- ✅ Hidden Markov Models (HMM)
+- ✅ Conditional Random Fields (CRF)
+- ✅ Recurrent Neural Networks (RNN)
+- ✅ Named Entity Recognition (NER)
+- ✅ Part-of-Speech (POS) tagging
 
 ---
 
@@ -106,11 +106,11 @@
 ## 🗣️ Natural Language Processing (NLP)
 
 - ❌ Statistical language modeling
-- ❌ LDA
-- ❌ NER
+- ✅ LDA
+- ✅ NER
 - ❌ Word embedding
 - ❌ Word2Vec
-- ❌ Sentiment analysis
+- ✅ Sentiment analysis
 - ❌ BERT
 - ❌ ULMFiT
 
@@ -130,7 +130,7 @@
 ## ⚙️ Training and Optimization
 
 - ❌ Adaptive gradient methods
-- ❌ Regularization & overfitting
+- ✅ Regularization & overfitting
 - ❌ Loss functions
 - ❌ Bayesian vs MLE
 - ❌ Class imbalance
