@@ -38,7 +38,7 @@
 - ✅ Self-organizing maps
 - ❌ Deep belief nets
 - ❌ Expectation maximization (EM)
-- ❌ Gaussian mixture models (GMM)
+- ✅ Gaussian mixture models (GMM)
 - ❌ Clustering evaluation metrics
 
 ---

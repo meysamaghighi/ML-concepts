@@ -1,5 +1,6 @@
 # Python Study Notes
 
+- Must-visit overview: https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4723/
 - Use floor division for integer division: `//`
 - `int` supports big integers natively
 - Recursion limit is ~1000 calls
