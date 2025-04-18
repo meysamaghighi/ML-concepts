@@ -241,7 +241,7 @@ These techniques test how well a model holds up under different data or distribu
 
 - **Cross-Validation**  
   Estimates model performance by partitioning data into training and testing sets multiple times.  
-  <code style="color:lightskyblue">(Helps assess generalization performance)</code>  
+  <code style="color : lightskyblue">(Helps assess generalization performance)</code>  
   **Concept**: Divide data into *k* folds, train on *k−1* folds and test on the remaining fold, then average the results.
 
   **Python Example**:
