@@ -60,7 +60,7 @@ for token in doc:
 
 Used to find important words in documents:
 
-$$ tfidf(t, d) = tf(t, d) \cdot \log\left(\frac{N}{df(t)}\right) $$
+$$ tf-idf(t, d) = tf(t, d) \cdot \log\left(\frac{N}{df(t)}\right) $$
 
 Where:
 - $tf(t, d)$ = term frequency of word *t* in document *d*

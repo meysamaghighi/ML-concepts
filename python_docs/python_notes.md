@@ -98,3 +98,31 @@ ans = [""] * len(s)
 ...
 return ''.join(ans)
 ```
+- Example w/ `regex`, `Counter`, and `lower()`:
+```python
+def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+    
+    words = re.findall(r"\w+", paragraph.lower())
+    b_words = [word.lower() for word in banned]
+    count = collections.Counter(word for word in words if word not in b_words)
+    
+    return count.most_common(1)[0][0]
+```
+- Use `dict.get()` for simpler **None-handling**:
+```python
+x = my_map[key]     # ❌ doesn't handle key = None
+x = my_map.get(key) # ✅ Handles key = None -> returns None```
+```
+- **Recursive solutions**:
+    - Each recursive call adds a new **stack frame** to the call stack (storing local variables, return addresses, function metadata). This adds **additional O(n) space just for the call stack**!
+    - Python has a recursion **depth limit of 1000**.
+    - **Unpredictable garbage collection**.
+- **Set intersection** and **unpacking a list**:
+```python
+def customers_visited_every_day(logs_by_day):
+    if not logs_by_day:
+        return set()
+
+    return set.intersection(*logs_by_day)
+```
+- 
