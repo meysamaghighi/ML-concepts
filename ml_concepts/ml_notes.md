@@ -99,4 +99,9 @@ Absolutely, Meysam! Here’s a **compact summary** of Conditional Random Fields 
 
 - **PCA** gives the **eigenvectors of the covariance matrix** (even if it's computed via SVD under the hood).
 - **Eigenvectors** are special directions, that only scale under a matrix's linear transformation. i.e., $Ax = \lambda x$. **Eigenvalues** tell us how much stretching happens in those directions.
-- 
+- A **latent feature** is a hidden or **inferred property** that isn’t directly observed in your data — but it helps **explain patterns** in that data.
+    - E.g., Data is users (m) by movies (n). A latent feature could be genre that a user likes, and a UV decomposition where U is $m\times k$ and V is $k\times n$ where $k \ll m, n$.
+    - They form hidden dimensions in these models:
+        - 📦 **Matrix Factorization** (user and item latent vectors)
+        - 🤖 **Autoencoders** (bottleneck layer outputs)
+        - 🎯 **LDA (Latent Dirichlet Allocation)** (topic proportions in documents)
