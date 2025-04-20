@@ -105,13 +105,13 @@
 
 ## 🗣️ Natural Language Processing (NLP)
 
-- ❌ Statistical language modeling
+- ✅ Statistical language modeling
 - ✅ LDA
 - ✅ NER
-- ❌ Word embedding
-- ❌ Word2Vec
+- ✅ Word embedding
+- ✅ Word2Vec
 - ✅ Sentiment analysis
-- ❌ BERT
+- ✅ BERT
 - ❌ ULMFiT
 
 ---

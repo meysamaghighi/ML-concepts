@@ -101,9 +101,19 @@ model.fit(corpus, labels)
 
 ### 🧬 3. Word Representations
 
-#### **Word2Vec**
+Instead of representing words as discrete symbols, NLP uses **vectors** that encode semantic meaning. There are two main types:
 
-Instead of using words as symbols, we represent them as vectors that encode meaning. Word2Vec trains a neural network to predict context words (Skip-gram) or center word (CBOW).
+---
+
+#### 📌 **Static Word Embeddings**
+
+Static embeddings assign **a single vector per word**, regardless of context.
+
+##### **Word2Vec**
+
+Word2Vec trains a shallow neural network to either:
+- Predict context words from a target word (**Skip-gram**), or
+- Predict the target word from surrounding words (**CBOW**).
 
 ```python
 from gensim.models import Word2Vec
@@ -112,15 +122,25 @@ model = Word2Vec(sentences, vector_size=100, window=5, min_count=1)
 print(model.wv['NLP'])
 ```
 
-#### **GloVe**
+##### **GloVe**
 
-GloVe learns word vectors by looking at how often words co-occur in a large corpus. Its cost function is:
-$$J = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2$$
-Where $X_{ij}$ is how often word $i$ appears near word $j$.
+GloVe learns embeddings based on **word co-occurrence** statistics across the entire corpus.
 
-#### **Contextual Embeddings (e.g., BERT)**
+Cost function:
 
-BERT gives different embeddings for the same word depending on its context.
+$$
+J = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2
+$$
+
+Where $X_{ij}$ = how often word $i$ appears appears near word $j$.
+
+---
+
+#### 🔄 **Contextual Word Embeddings**
+
+Contextual embeddings generate **different vectors** for the same word depending on its **surrounding words**. These are typically produced by deep models like **BERT**, **GPT**, or **ELMo**.
+
+##### **Example with BERT**
 
 ```python
 from transformers import BertTokenizer, BertModel
@@ -128,9 +148,35 @@ import torch
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertModel.from_pretrained('bert-base-uncased')
+
 inputs = tokenizer("Bank of a river", return_tensors="pt")
-outputs = model(**inputs)
+outputs = model(**inputs)  # outputs.last_hidden_state contains contextual embeddings
 ```
+
+The same word "bank" in different contexts will get **different vector representations**.
+
+---
+
+### 🧠 Static vs Contextual Embeddings: Comparison
+
+| Feature                     | Static Embeddings            | Contextual Embeddings         |
+|-----------------------------|------------------------------|-------------------------------|
+| One vector per word         | ✅ Yes                        | ❌ No                          |
+| Context-aware               | ❌ No                         | ✅ Yes                         |
+| Captures word polysemy      | ❌ No                         | ✅ Yes                         |
+| Examples                    | Word2Vec, GloVe, FastText     | BERT, ELMo, GPT                |
+| Computation cost            | 💡 Low                        | ⚡ High                        |
+| Training approach           | Pretrained on co-occurrence  | Deep transformer-based models |
+| Output                      | Fixed per word               | Varies with sentence context  |
+
+---
+
+### 🧾 Example
+
+| Sentence                        | Word  | Static Vector | Contextual Vector |
+|---------------------------------|-------|---------------|-------------------|
+| "She sat by the **bank**."      | bank  | Same          | Embeds riverbank  |
+| "He works at the **bank**."     | bank  | Same          | Embeds finance    |
 
 ---
 
