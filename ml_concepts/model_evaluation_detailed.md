@@ -110,9 +110,9 @@ These measure how well a model makes predictions.
 - **R² Score** <span style="color:#1E90FF">(Useful for overall fit)</span>
   - **Explanation**: Proportion of variance explained.
   - **Formula**:
-  ```math
-  R^2 = 1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}}
-  ```
+```math
+R^2 = 1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}}
+```
   - **Python**:
     ```python
     from sklearn.metrics import r2_score
