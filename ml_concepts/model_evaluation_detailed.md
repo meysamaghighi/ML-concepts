@@ -113,7 +113,6 @@ These measure how well a model makes predictions.
 ```math
 R^2 = 1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}}
 ```
-  - **Python**:
     ```python
     from sklearn.metrics import r2_score
     r2_score(y_true, y_pred)

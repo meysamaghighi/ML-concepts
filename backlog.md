@@ -58,12 +58,12 @@
 
 ## 🔽 Dimensionality Reduction
 
-- ❌ Autoencoders
-- ❌ t-SNE
-- ❌ Principal component analysis (PCA)
-- ❌ Singular value decomposition (SVD)
-- ❌ Spectral clustering
-- ❌ Matrix factorization
+- ✅ Autoencoders
+- ✅ t-SNE
+- ✅ Principal component analysis (PCA)
+- ✅ Singular value decomposition (SVD)
+- ✅ Spectral clustering
+- ✅ Matrix factorization
 
 ---
 

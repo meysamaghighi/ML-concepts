@@ -97,4 +97,6 @@ Absolutely, Meysam! Here’s a **compact summary** of Conditional Random Fields 
 | **SRL (Semantic Role Labeling)** | **Roles:** Who is doing what to whom? | `Agent: John, Action: gave, Recipient: Mary, Theme: book, Location: London, Time: Tuesday` |
 | **Coreference** | **Tracking:** Which mentions refer to the same thing? | `"John gave Mary a book. He..."` → `"John"` and `"He"` are linked |
 
+- **PCA** gives the **eigenvectors of the covariance matrix** (even if it's computed via SVD under the hood).
+- **Eigenvectors** are special directions, that only scale under a matrix's linear transformation. i.e., $Ax = \lambda x$. **Eigenvalues** tell us how much stretching happens in those directions.
 - 
