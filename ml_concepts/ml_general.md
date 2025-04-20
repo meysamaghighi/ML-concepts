@@ -17,12 +17,12 @@ The **bias–variance tradeoff** describes how model complexity affects the two 
 ### 🎯 Bias–Variance Decomposition (of MSE)
 
 Let’s denote:
-- $ f(x) $: true function
-- $ \hat{f}(x) $: predicted function (learned model)
-- $ y $: actual value, $ y = f(x) + \varepsilon $
-- $ \mathbb{E}[\cdot] $: expected value over different training sets
+- $f(x)$: true function
+- $\hat{f}(x)$: predicted function (learned model)
+- $y$: actual value, $y = f(x) + \varepsilon$
+- $\mathbb{E}[\cdot]$: expected value over different training sets
 
-Then the **expected Mean Squared Error (MSE)** at a point $ x $ is:
+Then the **expected Mean Squared Error (MSE)** at a point $x$ is:
 
 $$
 \mathbb{E}[(y - \hat{f}(x))^2] = \underbrace{[\text{Bias}(\hat{f}(x))]^2}_{\text{Squared Bias}} + \underbrace{\text{Var}(\hat{f}(x))}_{\text{Variance}} + \underbrace{\sigma^2}_{\text{Irreducible Error}}
@@ -30,9 +30,9 @@ $$
 
 Where:
 
-- **Bias**: $ \text{Bias}(\hat{f}(x)) = \mathbb{E}[\hat{f}(x)] - f(x) $
-- **Variance**: $ \text{Var}(\hat{f}(x)) = \mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2] $
-- **$ \sigma^2 $**: Variance of the noise $ \varepsilon $
+- **Bias**: $\text{Bias}(\hat{f}(x)) = \mathbb{E}[\hat{f}(x)] - f(x)$
+- **Variance**: $\text{Var}(\hat{f}(x)) = \mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$
+- **$\sigma^2$**: Variance of the noise $ \varepsilon$
 
 ---
 
