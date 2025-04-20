@@ -24,7 +24,9 @@ Let’s denote:
 
 Then the **expected Mean Squared Error (MSE)** at a point $x$ is:
 
-$\mathbb{E}[(y - \hat{f}(x))^2] = \underbrace{[\text{Bias}(\hat{f}(x))]^2}_{\text{Squared Bias}} + \underbrace{\text{Var}(\hat{f}(x))}_{\text{Variance}} + \underbrace{\sigma^2}_{\text{Irreducible Error}}$
+```math
+\mathbb{E}[(y - \hat{f}(x))^2] = \underbrace{[\text{Bias}(\hat{f}(x))]^2}_{\text{Squared Bias}} + \underbrace{\text{Var}(\hat{f}(x))}_{\text{Variance}} + \underbrace{\sigma^2}_{\text{Irreducible Error}}
+```
 
 Where:
 
