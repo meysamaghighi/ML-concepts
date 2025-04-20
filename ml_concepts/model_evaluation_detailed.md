@@ -73,11 +73,11 @@ These measure how well a model makes predictions.
 - **Equal Error Rate (EER)** (Used in biometric systems and verification tasks)
 
   - **Explanation**: The point where the false acceptance rate (FAR) equals the false rejection rate (FRR).
-  - **Python**:
-    ```python
-    # Custom computation using ROC or DET curve intersection
-    ```
-
+  - Relation to TPR (True Positive Rate) and FPR (False Positive Rate), and ROC curve:
+    - TPR = 1 - FRR
+    - FPR = FAR
+  ![alt text](image-5.png)
+  
 ---
 ### Regression Models
 
@@ -109,7 +109,10 @@ These measure how well a model makes predictions.
 
 - **R² Score** <span style="color:#1E90FF">(Useful for overall fit)</span>
   - **Explanation**: Proportion of variance explained.
-  - **Formula**: $1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}}$
+  - **Formula**:
+  ```math
+  R^2 = 1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}}
+  ```
   - **Python**:
     ```python
     from sklearn.metrics import r2_score

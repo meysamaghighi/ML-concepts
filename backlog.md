@@ -79,12 +79,12 @@
 
 ## 🎮 Reinforcement Learning
 
-- ❌ SARSA
-- ❌ Explore–exploit techniques
-- ❌ Multi-armed bandits (ε-greedy, UCB, Thompson Sampling)
-- ❌ Q-learning
-- ❌ Deep Q-Networks (DQN)
-- ❌ RL applications (retail, NLP, robotics, etc.)
+- ✅ SARSA
+- ✅ Explore–exploit techniques
+- ✅ Multi-armed bandits (ε-greedy, UCB, Thompson Sampling)
+- ✅ Q-learning
+- ✅ Deep Q-Networks (DQN)
+- ✅ RL applications (retail, NLP, robotics, etc.)
 
 ---
 
@@ -146,9 +146,9 @@
 - ✅ Recall
 - ✅ Area under ROC
 - ✅ R-squared
-- ❌ Mean Average Precision (MAP)
-- ❌ Mean Reciprocal Rank (MRR)
-- ❌ Equal Error Rate (EER)
-- ❌ A/B Testing fundamentals
+- ✅ Mean Average Precision (MAP)
+- ✅ Mean Reciprocal Rank (MRR)
+- ✅ Equal Error Rate (EER)
+- ✅ A/B Testing fundamentals
 
 ---
