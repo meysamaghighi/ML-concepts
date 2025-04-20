@@ -115,9 +115,7 @@ print(model.wv['NLP'])
 #### **GloVe**
 
 GloVe learns word vectors by looking at how often words co-occur in a large corpus. Its cost function is:
-
-$$ J = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2 $$
-
+$$J = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2$$
 Where $X_{ij}$ is how often word $i$ appears near word $j$.
 
 #### **Contextual Embeddings (e.g., BERT)**
@@ -178,13 +176,16 @@ print(summarizer("Text summarization is the process of..."))
 ### 🧪 6. Evaluation Metrics
 
 #### **Classification Metrics**
-- **Precision** = TP / (TP + FP)
-- **Recall** = TP / (TP + FN)
-- **F1 Score** = Harmonic mean of precision and recall
+- **Precision** = TP / (TP + FP)  
+- **Recall** = TP / (TP + FN)  
+- **F1 Score** = Harmonic mean of precision and recall  
 
 #### **Generation Metrics**
-- **BLEU**: Compares overlap with reference (used in translation).
-- **ROUGE**: Overlap of n-grams (used in summarization).
+- **BLEU**: Compares overlap with reference (used in translation).  
+- **ROUGE**: Overlap of n-grams (used in summarization).  
+- **Perplexity**: Measures how well a language model predicts a sample. Lower perplexity indicates better predictive performance. Mathematically, it's the exponential of the average negative log-likelihood:
+
+$$\text{Perplexity} = \exp\left( -\frac{1}{N} \sum_{i=1}^{N} \log P(w_i \mid w_{i-1}) \right)$$
 
 ```python
 from sklearn.metrics import classification_report
@@ -213,3 +214,16 @@ print(classification_report([0, 1, 1], [0, 1, 0]))
 
 ---
 
+### 📘 9. NLP Sequence labeling
+
+**Sentence:**  
+👉 `"John gave Mary a book in London on Tuesday."`
+
+| Task Type | Focus | Output |
+|-----------|-------|--------|
+| **POS (Part-of-Speech) tagging** | **Syntax:** What is each word grammatically? | `NNP VBD NNP DT NN IN NNP IN NNP` |
+| **NER (Named Entity Recognition)** | **Semantics:** Is the word part of a real-world entity? | `John: PERSON, Mary: PERSON, London: LOC, Tuesday: DATE` |
+| **Chunking (Shallow Parsing)** | **Groups:** Which words form a meaningful unit? | `[(John), (gave), (Mary), (a book), (in London), (on Tuesday)]` |
+| **Dependency Parsing** | **Structure:** How do words relate grammatically? | `John → gave (subject), Mary → gave (indirect object), book → gave (direct object)` |
+| **SRL (Semantic Role Labeling)** | **Roles:** Who is doing what to whom? | `Agent: John, Action: gave, Recipient: Mary, Theme: book, Location: London, Time: Tuesday` |
+| **Coreference** | **Tracking:** Which mentions refer to the same thing? | `"John gave Mary a book. He..."` → `"John"` and `"He"` are linked |
