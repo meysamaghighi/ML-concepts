@@ -112,7 +112,7 @@
 - ✅ Word2Vec
 - ✅ Sentiment analysis
 - ✅ BERT
-- ❌ ULMFiT
+- ✅ ULMFiT
 
 ---
 
