@@ -90,16 +90,16 @@
 
 ## 🧠 Deep Learning
 
-- ❌ Feed-forward neural networks
-- ❌ Convolutional neural networks (CNN)
-- ❌ Backpropagation
-- ❌ Recurrent neural networks (RNN)
-- ❌ Long Short-Term Memory (LSTM)
+- ✅ Feed-forward neural networks
+- ✅ Convolutional neural networks (CNN)
+- ✅ Backpropagation
+- ✅ Recurrent neural networks (RNN)
+- ✅ Long Short-Term Memory (LSTM)
 - ❌ GANs
 - ❌ Attention mechanisms
-- ❌ Dropout
+- ✅ Dropout
 - ❌ Vanishing gradient
-- ❌ Activation functions
+- ✅ Activation functions
 
 ---
 
