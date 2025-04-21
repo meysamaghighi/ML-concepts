@@ -95,10 +95,10 @@
 - ✅ Backpropagation
 - ✅ Recurrent neural networks (RNN)
 - ✅ Long Short-Term Memory (LSTM)
-- ❌ GANs
-- ❌ Attention mechanisms
+- ✅ GANs
+- ✅ Attention mechanisms
 - ✅ Dropout
-- ❌ Vanishing gradient
+- ✅ Vanishing gradient
 - ✅ Activation functions
 
 ---
@@ -122,7 +122,7 @@
 - ❌ Image recognition
 - ❌ Pattern recognition
 - ❌ FaceNet
-- ❌ CNN (again)
+- ✅ CNN 
 - ❌ YOLO
 
 ---

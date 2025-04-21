@@ -10,7 +10,7 @@
 | 6  | **UMAP**                 | Manifold     | ❌       | ❌ (🟡semi)   | Local + some Global      | Fast, scalable, great for visualization |
 | 7  | **Isomap**               | Manifold     | ❌       | ❌           | Global                   | Captures global manifold via geodesics |
 | 8  | **LLE**                  | Manifold     | ❌       | ❌           | Local                    | Good for preserving local neighborhood |
-| 9  | **MDS**                  | Distance-based | 🟡linear | ❌         | Global (mostly)          | Preserves pairwise distances, useful for visualization |
+| 9  | **MDS (Multidimensional Scaling)**                  | Distance-based | 🟡linear | ❌         | Global (mostly)          | Preserves pairwise distances, useful for visualization |
 | 10 | **Spectral Clustering**  | Graph        | ❌       | ❌           | Local (via Laplacian)    | More for clustering than embedding |
 | 11 | **Matrix Factorization** | Latent       | 🟡semi   | ❌           | Global                   | Used in recommender systems |
 | 12 | **LDA**                  | Projection   | ✅       | ✅           | Global (class separation)| Supervised dimensionality reduction |
