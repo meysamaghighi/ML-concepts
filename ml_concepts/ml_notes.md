@@ -105,3 +105,6 @@ Absolutely, Meysam! Here’s a **compact summary** of Conditional Random Fields 
         - 📦 **Matrix Factorization** (user and item latent vectors)
         - 🤖 **Autoencoders** (bottleneck layer outputs)
         - 🎯 **LDA (Latent Dirichlet Allocation)** (topic proportions in documents)
+- The **elbow method** helps determine the optimal number of clusters in K-Means by plotting the **within-cluster sum of squares (WCSS)** against the number of clusters. The "elbow" point, where the decrease in WCSS slows down, suggests a good trade-off between model simplicity and accuracy.
+![alt text](image-8.png)
+- 

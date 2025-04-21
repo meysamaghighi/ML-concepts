@@ -43,7 +43,7 @@ CI = estimate ± critical_value × std_error. Use normal assumptions or bootstra
 - **Bayesian:** Parameters as distributions, uses priors → posteriors via Bayes’ theorem.
 
 **12. What is Bayes’ Theorem and how is it applied in ML?**  
-\[ P(A|B) = \frac{P(B|A)P(A)}{P(B)} \]  
+$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$  
 Used in Naive Bayes, Bayesian networks, optimization.
 
 **44. MLE vs Bayesian inference?**  
@@ -151,7 +151,7 @@ Assigns weights to parts of input. Visualized for interpretability (e.g., attent
 - **RNNs:** Lower memory, better on small data
 
 **50. What is the time complexity of Transformers?**  
-Self-attention: \(O(n^2d)\), with \(n\) = sequence length, \(d\) = dimension.
+Self-attention: $O(n^2d)$, with $n$ = sequence length, $d$ = dimension.
 
 **51. How does a Transformer work?**  
 Uses self-attention, positional encoding, feedforward layers, residual connections.
@@ -206,10 +206,10 @@ Optional: Lemmatization, POS tagging
 Adds penalty to loss function to avoid overfitting. See Q27.
 
 **37. What is the time complexity of matrix inversion?**  
-Typically \(O(n^3)\), but optimized versions exist (Cholesky, LU).
+Typically $O(n^3)$, but optimized versions exist (Cholesky, LU).
 
 **38. What is the closed-form solution of linear regression?**  
-\[\theta = (X^TX)^{-1}X^Ty\].  
+$\theta = (X^TX)^{-1}X^Ty$.  
 Used for small/medium data. For large data, use gradient descent.
 
 ---
