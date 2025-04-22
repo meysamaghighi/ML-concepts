@@ -48,23 +48,72 @@
 
 ---
 
-### **4. How to split a tree?**
+Here's an updated and more detailed version of your text, with deeper explanations of **Gini impurity**, **entropy**, what gets maximized, and how the **feature to split on** is selected:
 
-**Problem**: At each decision tree node, we must choose the best way to split data to increase model purity.  
-**Goal**: Split to maximize information gain and reduce impurity.
+---
 
-**Answer**:
-- Use metrics like:
-  - **Gini Impurity** (CART):  
-    \[
-    Gini = 1 - \sum p_i^2
-    \]
-  - **Information Gain / Entropy** (ID3):  
-    \[
-    Entropy = -\sum p_i \log p_i
-    \]
-- Choose feature and threshold that results in the best impurity reduction.
-- Repeat recursively until stopping conditions (max depth, min samples, etc.).
+### 4. How to Split a Tree?
+
+**Problem:** At each decision tree node, we must choose the best way to split the data to improve prediction quality.  
+**Goal:** Choose splits that **reduce impurity** and **maximize information gain**, making the resulting child nodes more "pure" (i.e., dominated by a single class).
+
+---
+
+### ✅ **Key Metrics for Splitting**
+
+#### 🔸 **Gini Impurity** (used in CART):
+```math
+\text{Gini} = 1 - \sum_{i=1}^{C} p_i^2
+```
+- $p_i$ is the proportion of samples belonging to class $i$ in the node.
+- Gini measures how *often a randomly chosen element would be incorrectly labeled* if it was randomly labeled according to the distribution in the node.
+- **Lower Gini = purer node**.
+
+#### 🔸 **Entropy** (used in ID3 and C4.5):
+```math
+\text{Entropy} = -\sum_{i=1}^{C} p_i \log_2(p_i)
+```
+- Entropy measures the **uncertainty** or **disorder** in the class distribution.
+- Higher entropy = more mixed classes; Lower entropy = purer.
+- A node where all samples belong to one class has **entropy = 0**.
+
+---
+
+### 🔍 What is *really* maximized across branches?
+
+We **maximize the **Information Gain**, which is the **reduction in impurity** after a split.
+
+#### Information Gain (IG):
+```math
+\text{IG} = \text{Impurity (parent)} - \sum_{k} \left( \frac{n_k}{n} \cdot \text{Impurity (child } k) \right)
+```
+
+Where:
+- $n_k$ = number of samples in child $k$,
+- $n$ = total samples in the parent,
+- The impurity can be either **Gini** or **Entropy** depending on the algorithm.
+
+So, we **maximize the impurity reduction** (or equivalently, **minimize the weighted impurity** of child nodes).
+
+---
+
+### 🌿 How is the best feature to split on selected?
+
+At each node:
+1. For **every feature**:
+   - Try all reasonable **thresholds** (for numeric) or **groups** (for categorical).
+   - Simulate a split using that feature and threshold.
+   - Calculate the **information gain** (or Gini reduction).
+2. Select the **feature and threshold** combination that gives the **highest information gain**.
+3. Apply the split and repeat the process **recursively** for each child node.
+
+---
+
+### 🛑 Stop when:
+- Max depth is reached.
+- Node has too few samples (e.g., `min_samples_split`).
+- Node is already pure (all samples same class).
+- Information gain is below a threshold.
 
 ---
 
@@ -106,9 +155,9 @@
 
 **Answer**:
 - Use **Binary Cross-Entropy Loss** applied independently to each label:
-  \[
+  ```math
   \text{Loss} = -\sum_{i=1}^L \left[ y_i \log(p_i) + (1 - y_i) \log(1 - p_i) \right]
-  \]
+  ```
 - If classes are imbalanced, use **weighted BCE** or **Focal Loss**.
 - For evaluation: use **macro/micro F1-score**, **subset accuracy**, or **mean average precision (mAP)**.
 
@@ -126,9 +175,9 @@
   - Meets business constraints (e.g., at least 90% precision).
   - Optimizes a **custom profit/loss function**.
   - Uses **Youden’s J statistic**:  
-    \[
+    ```math
     J = TPR - FPR
-    \]
+    ```
 
 ---
 

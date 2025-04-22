@@ -107,4 +107,18 @@ Absolutely, Meysam! Here’s a **compact summary** of Conditional Random Fields 
         - 🎯 **LDA (Latent Dirichlet Allocation)** (topic proportions in documents)
 - The **elbow method** helps determine the optimal number of clusters in K-Means by plotting the **within-cluster sum of squares (WCSS)** against the number of clusters. The "elbow" point, where the decrease in WCSS slows down, suggests a good trade-off between model simplicity and accuracy.
 ![alt text](image-8.png)
-- 
+- A **downstream task** refers to a specific application or final task that benefits from a **pre-trained model** or earlier **processing pipeline**. Think of it as the *end goal* or *real-world use* you're trying to achieve after doing some general-purpose modeling or training. Example in NLP:
+    - **Pretraining:** Train a language model like BERT on huge amounts of text with a general task like "predict missing words".
+    - **Downstream task:** Fine-tune that model for a specific goal, such as:
+        - Sentiment analysis
+        - Named entity recognition (NER)
+        - Question answering
+        - Text classification
+> **A downstream task is the task you're ultimately solving using the output or features from an earlier (often pretraining) stage.**
+- **Model fine-tuning** is the process of taking a **pre-trained model** and retraining it on your **specific task** using your **own data**. It lets you adapt the model without training from scratch.
+
+- 🔄 **Reuse knowledge** from large datasets
+- 🎯 **Customize** for your downstream task
+- ⚙️ Can fine-tune all layers or just a few
+
+Common in NLP, vision, and LLMs (e.g., using BERT for sentiment analysis or ResNet for dog vs. cat classification).
