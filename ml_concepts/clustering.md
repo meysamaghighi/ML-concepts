@@ -60,9 +60,9 @@ $$ J = \sum_{k=1}^{K} \sum_{x_i \in C_k} \|x_i - \mu_k\|^2 $$
 ### 3. **Fuzzy Clustering**
 Also called *soft clustering* or *soft k-means*.
 - **Math**: Minimizes a weighted squared error:
-  
-$$ J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \|x_i - c_j\|^2 $$
-  
+```math
+J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \|x_i - c_j\|^2
+```
 where $ u_{ij} $ is the membership of point $ x_i $ in cluster $ j $, and $ m > 1 $ controls fuzziness.
 - **Idea**: Each point **belongs to multiple clusters** with varying degrees of membership.
 - **Code**:
@@ -76,10 +76,9 @@ where $ u_{ij} $ is the membership of point $ x_i $ in cluster $ j $, and $ m > 
 
 ### 4. **Gaussian Mixture Model (GMM)**
 - **Math**: Soft clusters using Gaussian distributions:
-  
-  $$
+  ```math
   p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)
-  $$
+  ```
 
   where $\pi_k$ is the mixing coefficient for the $k$-th component (i.e., the prior probability of choosing cluster $k$), and $\sum_k \pi_k = 1$.
 
@@ -95,9 +94,10 @@ where $ u_{ij} $ is the membership of point $ x_i $ in cluster $ j $, and $ m > 
 
 ### 5. **Expectation Maximization (EM)**
 - **Math**: Iteratively optimizes the expected log-likelihood:
-  
-$$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} \newline
-\text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}} $$
+```math
+\text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)} \newline
+\text{M-step:} \ \mu_k = \frac{\sum_i \gamma_{ik} x_i}{\sum_i \gamma_{ik}}
+```
 
 - **Idea**: Powers soft clustering in GMMs and temporal models like HMM.
 - **Code**: Embedded in `GaussianMixture()` or HMM packages.
@@ -121,8 +121,9 @@ $$ \text{E-step:} \ \gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)
 
 ### 7. **OPTICS**
 - **Math**: Orders points by reachability distance:
-  
-$$ \text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o)) $$
+```math  
+\text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o))
+```
 
 - **Idea**: Like DBSCAN but works with **varying densities** and outputs a reachability plot.
 - **Code**:
@@ -148,8 +149,9 @@ $$ \text{Reachability}(p, o) = \max(\text{core\_dist}(o), \text{dist}(p, o)) $$
 
 ### 9. **MeanShift**
 - **Math**: Moves points to the local density maximum:
-  
-$$ x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)} $$
+```math
+x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)}
+```
 
 - **Idea**: Each point shifts toward the densest area nearby — no fixed number of clusters.
 - **Code**:
@@ -171,8 +173,9 @@ $$ x_{t+1} = \frac{\sum_{i} K(x_i - x_t) x_i}{\sum_{i} K(x_i - x_t)} $$
 
 ### 11. **Agglomerative Clustering**
 - **Math**: Greedily merges clusters using linkage (e.g., average, complete):
-  
-$$ \text{Linkage}(A, B) = \min_{a \in A, b \in B} \|a - b\| $$
+```math
+\text{Linkage}(A, B) = \min_{a \in A, b \in B} \|a - b\|
+```
 
 - **Idea**: Builds a hierarchy by merging closest clusters.
 - **Code**:
@@ -198,9 +201,9 @@ $$ \text{Linkage}(A, B) = \min_{a \in A, b \in B} \|a - b\| $$
 
 ### 13. **Spectral Clustering**
 - **Math**: Uses eigenvectors of the **Laplacian matrix** of a similarity graph:
-  
-$$ L = D - A $$
-  
+```math
+L = D - A
+```
   where $ D $ is the degree matrix and $ A $ is the adjacency matrix.
 - **Idea**: Finds clusters by cutting a graph into parts with minimal edges between them.
 - **Code**:
@@ -254,8 +257,9 @@ $$ w_j(t+1) = w_j(t) + \alpha(t) \cdot h_{bj}(t) \cdot (x(t) - w_j(t)) $$
 
 ### 17. **One-Class SVM**
 - **Math**: Solves:
-  
-$$ \min_{w, \rho} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad w \cdot \phi(x_i) \geq \rho - \xi_i $$
+```math
+\min_{w, \rho} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad w \cdot \phi(x_i) \geq \rho - \xi_i
+```
 
 - **Idea**: Learns a boundary around the "normal" class; anything outside is an outlier.
 - **Code**:
@@ -270,7 +274,9 @@ $$ \min_{w, \rho} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad w \cdot \phi(x_i) 
 ### 18. **Local Outlier Factor (LOF)**
 - **Math**: Compares density of point to its neighbors:
 
-$$ \text{LOF}(p) = \frac{\sum_{o \in N_k(p)} \frac{\text{lrd}(o)}{\text{lrd}(p)}}{|N_k(p)|} $$
+```math
+\text{LOF}(p) = \frac{\sum_{o \in N_k(p)} \frac{\text{lrd}(o)}{\text{lrd}(p)}}{|N_k(p)|}
+```
 
   where lrd = local reachability density.
 - **Idea**: Points that are **less dense than neighbors** are flagged as outliers.
