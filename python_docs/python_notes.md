@@ -126,4 +126,5 @@ def customers_visited_every_day(logs_by_day):
     return set.intersection(*logs_by_day)
 ```
 - In python `set` elements must be **hashable**. Only **immutable** types are hashable (`int`, `str`, `tuple`, `frozenset`). **Mutable** types are not hashable and cannot be in sets (`list`, `dict`, `set`).
-- 
+- `bisect_left()` for binary search in a sorted array.
+- Use `float('inf')` for infinity and `float('-inf')` for negative infinity.

@@ -8,7 +8,7 @@
 - **Recall** = TP / (TP + FN), **how well the model identifies all actual positives**
 - L1 regularization (LASSO): can shrink some weights to zero (feature selection)
 - L2 regularization (RIDGE): shrinks all weights but keeps them small, to make sure not one feature will dominate the others.
-- **Feature scaling** is doen to ensure all features contribute equally, preventing some larger ranges from dominating. This helps models converge faster and perform better. Tree-based models like DT and RF don't require feature scaling. Also when using SVMs w/ non-linear kernels, scaling isn't as crucial as in linear models. Common ones are:
+- **Feature scaling** is done to ensure all features contribute equally, preventing some larger ranges from dominating. This helps models converge faster and perform better. Tree-based models like DT and RF don't require feature scaling. Also when using SVMs w/ non-linear kernels, scaling isn't as crucial as in linear models. Common ones are:
     - *Min-Max Scaler*: scales features to a specific range.
     - *Standard Scaler*: transform features to have a mean of 0 and a standard deviation of 1.
 - **Bagging** = Bootstrap Aggregating
@@ -75,7 +75,6 @@
         1. Estimate the posterior: $P(\theta|\text{data})$
     - In standard ML, we don't need MCMC/Gibbs, there we minimize a loss function using optimization and get point estimates of model parameters.
     - Gibbs applications: LDA (Latent, Dirichlet Allocation), Medical diagnosis, image denoising, recommender systems.
-Absolutely, Meysam! Here’s a **compact summary** of Conditional Random Fields (CRFs) with highlights and a **minimal code snippet**:
 - **Conditional Random Fields (CRFs)** are **discriminative probabilistic models** used for **structured prediction** tasks.
     - They model the **conditional probability** \( P(Y|X) \) of output variables (like label sequences) given input data.
     - CRFs are powerful for tasks where **outputs are interdependent**, such as **Named Entity Recognition (NER)**, **POS tagging**, and **image segmentation**.
