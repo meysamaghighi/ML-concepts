@@ -9,7 +9,7 @@
 
 
 
-## Responses (ChatGPT):
+## Responses (post-int):
 
 ### **1. How will you detect overfitting in neural networks?**
 #### **1.1 During training? How will you detect if you are overfitting?**

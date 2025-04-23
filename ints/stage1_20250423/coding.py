@@ -47,3 +47,4 @@ class KNN:
             
         # take consensus
         # TODO
+
